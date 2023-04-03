@@ -1,0 +1,13 @@
+v 4
+file / "/home/luis/Documents/UTFPR/5_periodo/arq-comp/vhdl/ULA/comparador.vhd" "c7220033bf9362fb449a5ed418839fe33a0f404f" "20230403021305.039":
+  entity comparador at 1( 0) + 0 on 45;
+  architecture rtl of comparador at 12( 214) + 0 on 46;
+file / "/home/luis/Documents/UTFPR/5_periodo/arq-comp/vhdl/ULA/multiplicador.vhd" "21917f4206bfef42409cc39bc0f0248795b95b80" "20230403021009.226":
+  entity multiplicador at 1( 0) + 0 on 43;
+  architecture rtl of multiplicador at 12( 255) + 0 on 44;
+file . "comparador_tb.vhd" "6edf7abb0161b7a6c840f7c824d21a610d8199cb" "20230403005633.339":
+  entity comparador_tb at 1( 0) + 0 on 31;
+  architecture rtl of comparador_tb at 8( 107) + 0 on 32;
+file . "multiplicador_tb.vhd" "5b938452891f34459a1e69f46c9b8ab19d4f9f47" "20230403015205.668":
+  entity multiplicador_tb at 1( 0) + 0 on 39;
+  architecture rtl of multiplicador_tb at 8( 110) + 0 on 40;

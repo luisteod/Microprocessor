@@ -1,0 +1,6 @@
+{
+    "ghdl-interface.library.LibraryDirectory": [
+        "/home/luis/Documents/UTFPR/5_periodo/arq-comp/vhdl/ULA"
+    ],
+    "ghdl-interface.vhdl.VHDLStandard": "93c"
+}
