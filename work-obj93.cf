@@ -1,0 +1,10 @@
+v 4
+file / "/home/luis/Documents/UTFPR/5_periodo/arq-comp/vhdl/microprocessor/ULA/multiplicador.vhd" "37cac06b25134e799b4c09d3001160503b4db2ac" "20230403221613.037":
+  entity multiplicador at 1( 0) + 0 on 11;
+  architecture rtl of multiplicador at 12( 251) + 0 on 12;
+file / "/home/luis/Documents/UTFPR/5_periodo/arq-comp/vhdl/microprocessor/ULA/ULA.vhd" "8e344bed9e5e313521af202e4a12fb2f455e19f4" "20230403231714.749":
+  entity ula at 1( 0) + 0 on 21;
+  architecture rtl of ula at 14( 300) + 0 on 22;
+file / "/home/luis/Documents/UTFPR/5_periodo/arq-comp/vhdl/microprocessor/ULA/ULA_tb.vhd" "a008c80927428ef52a3caeb3fc1085ff8f067510" "20230403231722.498":
+  entity ula_tb at 1( 0) + 0 on 23;
+  architecture rtl of ula_tb at 8( 100) + 0 on 24;
