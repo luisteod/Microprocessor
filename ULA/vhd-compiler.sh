@@ -2,11 +2,11 @@
 echo "Digite o nome do arquivo sem o .vhd e sem _tb"
 read nome_arquivo
 
-echo "Digite se é um arquivo do tipo _tb : Y or N"
+echo "Digite se é um arquivo do tipo _tb : (y) or (n)"
 read tipo
 
 #para acessar a variável coloca-se o cifrão
-if [ $tipo == "Y" ];
+if [ $tipo == "y" ];
     then
         ghdl -a "$nome_arquivo"_tb.vhd
         ghdl -e "$nome_arquivo"_tb
