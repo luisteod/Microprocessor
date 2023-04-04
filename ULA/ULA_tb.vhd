@@ -32,12 +32,19 @@ begin
 
 process
 begin
+    --soma
     WA <= "0000000000000000";
     WB <= "1010101011010010";
-    CTRL <= "00";
+    CTRL <= "01";
     wait for 50 ns;
+    --sub
     WA <= "1000000000001101";
     WB <= "0010101011010010";
+    CTRL <= "10";
+    wait for 50 ns;
+    --mult
+    WA <= "0000000000000000";
+    WB <= "0010101011011011";
     CTRL <= "00";
     wait for 50 ns;
     wait;

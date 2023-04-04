@@ -11,9 +11,12 @@ file . "comparador_tb.vhd" "6edf7abb0161b7a6c840f7c824d21a610d8199cb" "202304030
 file . "multiplicador_tb.vhd" "5b938452891f34459a1e69f46c9b8ab19d4f9f47" "20230403015205.668":
   entity multiplicador_tb at 1( 0) + 0 on 39;
   architecture rtl of multiplicador_tb at 8( 110) + 0 on 40;
-file . "ULA.vhd" "e6f1b5af5f0adbd08f63425142d7f1a6c098b42c" "20230403233755.993":
-  entity ula at 1( 0) + 0 on 67;
-  architecture rtl of ula at 15( 350) + 0 on 68;
-file . "ULA_tb.vhd" "31b07d7199102da02a5558116a129cff75b5d77b" "20230403234517.172":
-  entity ula_tb at 1( 0) + 0 on 73;
-  architecture rtl of ula_tb at 8( 100) + 0 on 74;
+file . "ULA.vhd" "34c689e7016d225128e5fefe4ee62fa348b0795b" "20230404222556.084":
+  entity ula at 1( 0) + 0 on 79;
+  architecture rtl of ula at 15( 350) + 0 on 80;
+file . "ULA_tb.vhd" "2547ff632e7bbdfb7bc54652a37ac1ac1b14d500" "20230404234950.713":
+  entity ula_tb at 1( 0) + 0 on 89;
+  architecture rtl of ula_tb at 8( 100) + 0 on 90;
+file . "soma_subt.vhd" "95e99c1edffc43b8b61dc0e1d389d415be1d1564" "20230404222435.127":
+  entity soma_subt at 1( 0) + 0 on 77;
+  architecture a_soma_subt of soma_subt at 12( 267) + 0 on 78;
