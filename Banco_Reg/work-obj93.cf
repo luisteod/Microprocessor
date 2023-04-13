@@ -1,0 +1,7 @@
+v 4
+file . "registrador.vhd" "1c9960063ba4953d112eb9dbaf0d751acc7592e4" "20230413201947.485":
+  entity registrador at 1( 0) + 0 on 25;
+  architecture rtl of registrador at 15( 297) + 0 on 26;
+file . "registrador_tb.vhd" "dc5d62802a3e7bdc661cd59b9b2c68a75cdec3a6" "20230413201956.361":
+  entity registrador_tb at 1( 0) + 0 on 27;
+  architecture rtl of registrador_tb at 8( 108) + 0 on 28;
