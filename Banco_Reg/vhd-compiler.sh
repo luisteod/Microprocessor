@@ -8,6 +8,8 @@ read tipo
 #para acessar a variável coloca-se o cifrão
 if [ $tipo == "y" ];
     then
+	ghdl -a "$nome_arquivo".vhd
+	ghdl -e "$nome_arquivo"
         ghdl -a "$nome_arquivo"_tb.vhd
         ghdl -e "$nome_arquivo"_tb
         ghdl -r "$nome_arquivo"_tb --wave="$nome_arquivo"_tb.ghw
