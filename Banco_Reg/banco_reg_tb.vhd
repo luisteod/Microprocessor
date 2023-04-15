@@ -66,6 +66,9 @@ begin
         wait for 10 ns;
         CLK         <= '1';
         wait for 50 ns;
+        CLK         <= '0';
+        IN_REG_A    <= "111";
+        wait for 50 ns;
         wait;
     end process;
 

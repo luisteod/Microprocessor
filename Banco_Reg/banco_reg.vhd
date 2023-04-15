@@ -33,10 +33,10 @@ architecture rtl of banco_reg is
            data_out_4, data_out_5, 
            data_out_6, data_out_7   : unsigned(15 downto 0) := "0000000000000000"; 
     
-    signal data_in_0, data_in_1,
-           data_in_2, data_in_3, 
-           data_in_4, data_in_5, 
-           data_in_6, data_in_7     : unsigned(15 downto 0) := "0000000000000000";
+    signal wr_0, wr_1, 
+           wr_2, wr_3,
+           wr_4, wr_5,
+           wr_6, wr_7               : std_logic := '0';
 
 
 begin 
@@ -44,61 +44,61 @@ begin
     reg0 : registrador port map(
         rst      => RST,
         clk      => CLK,
-        wr_en    => WR_EN,
-        data_in  => data_in_0,
+        wr_en    => wr_0,
+        data_in  => DATA_IN,
         data_out => data_out_0
     );
 
     reg1 : registrador port map(
         rst      => RST,
         clk      => CLK,
-        wr_en    => WR_EN,
-        data_in  => data_in_1,
+        wr_en    => wr_1,
+        data_in  => DATA_IN,
         data_out => data_out_1
     );
 
     reg2 : registrador port map(
         rst      => RST,
         clk      => CLK,
-        wr_en    => WR_EN,
-        data_in  => data_in_2,
+        wr_en    => wr_2,
+        data_in  => DATA_IN,
         data_out => data_out_2
     );
     reg3 : registrador port map(
         rst      => RST,
         clk      => CLK,
-        wr_en    => WR_EN,
-        data_in  => data_in_3,
+        wr_en    => wr_3,
+        data_in  => DATA_IN,
         data_out => data_out_3
     );
     reg4 : registrador port map(
         rst      => RST,
         clk      => CLK,
-        wr_en    => WR_EN,
-        data_in  => data_in_4,
+        wr_en    => wr_4,
+        data_in  => DATA_IN,
         data_out => data_out_4
     );
     reg5 : registrador port map(
         rst      => RST,
         clk      => CLK,
-        wr_en    => WR_EN,
-        data_in  => data_in_5,
+        wr_en    => wr_5,
+        data_in  => DATA_IN,
         data_out => data_out_5
     );
 
     reg6 : registrador port map(
         rst      => RST,
         clk      => CLK,
-        wr_en    => WR_EN,
-        data_in  => data_in_6,
+        wr_en    => wr_6,
+        data_in  => DATA_IN,
         data_out => data_out_6
     );
 
     reg7 : registrador port map(
         rst      => RST,
         clk      => CLK,
-        wr_en    => WR_EN,
-        data_in  => data_in_7,
+        wr_en    => wr_7,
+        data_in  => DATA_IN,
         data_out => data_out_7
     );
 
@@ -126,19 +126,35 @@ begin
     
     
     --ESCRITA NO BARRAMENTO C
-    process(IN_REG_C, DATA_IN, CLK, WR_EN)
+    process(WR_EN, IN_REG_C)
     begin
-        case IN_REG_C is
-            when "001"  => data_in_1 <= DATA_IN;
-            when "010"  => data_in_2 <= DATA_IN;
-            when "011"  => data_in_3 <= DATA_IN;
-            when "100"  => data_in_4 <= DATA_IN;
-            when "101"  => data_in_5 <= DATA_IN;
-            when "110"  => data_in_6 <= DATA_IN;
-            when "111"  => data_in_7 <= DATA_IN;
-            when others => data_in_0 <= "0000000000000000";
-        end case;
+        if(WR_EN = '1') then
+            if(IN_REG_C = "001") then
+                wr_1 <= '1';
+            elsif IN_REG_C = "010" then
+                wr_2 <= '1';
+            elsif IN_REG_C = "011" then
+                wr_3 <= '1';
+            elsif IN_REG_C = "100" then
+                wr_4 <= '1';               
+            elsif IN_REG_C = "101" then
+                wr_5 <= '1'; 
+            elsif IN_REG_C = "110" then
+                wr_6 <= '1';
+            elsif IN_REG_C = "111" then
+                wr_7 <= '1';
+            end if; 
+        else
+            wr_1 <= '0';
+            wr_2 <= '0';
+            wr_3 <= '0';
+            wr_4 <= '0';
+            wr_5 <= '0';
+            wr_6 <= '0';
+            wr_7 <= '0';
+        end if;
     end process;
+          
 
 end architecture;         
 
