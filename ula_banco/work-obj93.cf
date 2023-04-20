@@ -1,0 +1,7 @@
+v 4
+file . "ula_banco.vhd" "aece81c559be5ceaf9d9b5e5099f336a719cb1b0" "20230420023856.189":
+  entity ula_banco at 1( 0) + 0 on 67;
+  architecture rtl of ula_banco at 22( 575) + 0 on 68;
+file . "ula_banco_tb.vhd" "976df5636445bd9a8c3c0fe8f06a32b2a75de376" "20230420023856.286":
+  entity ula_banco_tb at 1( 0) + 0 on 69;
+  architecture rtl of ula_banco_tb at 8( 106) + 0 on 70;

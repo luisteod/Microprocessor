@@ -64,6 +64,8 @@ begin
         IN_REG_C    <= "111";
         WR_EN       <= '1';
         wait for 10 ns;
+        RST         <= '1';
+        wait for 10 ns;
         CLK         <= '1';
         wait for 50 ns;
         CLK         <= '0';

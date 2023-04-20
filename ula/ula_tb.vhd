@@ -2,12 +2,12 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity ULA_tb is
+entity ula_tb is
 end entity;
 
-architecture rtl of ULA_tb is
+architecture rtl of ula_tb is
 
-    component ULA
+    component ula
     port(
         IN_A  : in unsigned(15 downto 0);
         IN_B  : in unsigned(15 downto 0);
@@ -21,7 +21,7 @@ architecture rtl of ULA_tb is
 
 begin
 
-    uut : ULA port map(
+    uut : ula port map(
         IN_A  => S_IN_A,
         IN_B  => S_IN_B,
         SEL   => S_SEL,

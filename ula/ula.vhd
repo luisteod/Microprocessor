@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity ULA is
+entity ula is
     port(
         IN_A    : in unsigned(15 downto 0);
         IN_B    : in unsigned(15 downto 0);
@@ -11,7 +11,7 @@ entity ULA is
     );
 end entity;
 
-architecture rtl of ULA is
+architecture rtl of ula is
 
     signal S_IN_A   : unsigned(15 downto 0) := "0000000000000000"; 
     signal S_IN_B   : unsigned(15 downto 0) := "0000000000000000"; 
