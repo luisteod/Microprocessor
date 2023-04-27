@@ -1,7 +1,13 @@
 v 4
+file . "maquina_estados_tb.vhd" "b01210ed8ecb45b7ac8d30045ea76d914e7d0f7d" "20230427201354.360":
+  entity maquina_estados_tb at 1( 0) + 0 on 35;
+  architecture arch of maquina_estados_tb at 8( 137) + 0 on 36;
 file . "rom_tb.vhd" "f2e83c8238d29fc9d45461d134eb5b0dc6bc764f" "20230427194304.321":
   entity rom_tb at 1( 0) + 0 on 27;
   architecture arch of rom_tb at 8( 113) + 0 on 28;
 file . "rom.vhd" "672becfae6474d9bcd3faf60eb6fb29e8c3e8d7c" "20230427194304.199":
   entity rom at 1( 0) + 0 on 25;
   architecture arch of rom at 13( 247) + 0 on 26;
+file . "maquina_estados.vhd" "b53f0d151f4c04c02a58e7c6d0627920598c7777" "20230427201354.218":
+  entity maquina_estados at 1( 0) + 0 on 33;
+  architecture rtl of maquina_estados at 13( 222) + 0 on 34;
