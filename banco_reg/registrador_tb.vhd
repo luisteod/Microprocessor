@@ -16,8 +16,8 @@ architecture rtl of registrador_tb is
     );
     end component;
 
-    signal rst, clk, wr_en : std_logic := '0';
-    signal data_in, data_out : unsigned(15 downto 0) := "0000000000000000";
+    signal rst, clk, wr_en : std_logic;
+    signal data_in, data_out : unsigned(15 downto 0);
 
 begin
         reg : registrador port map(
