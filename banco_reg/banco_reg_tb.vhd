@@ -24,6 +24,7 @@ ARCHITECTURE rtl OF banco_reg_tb IS
     SIGNAL IN_REG_A, IN_REG_B, IN_REG_C : unsigned(2 DOWNTO 0);
     SIGNAL WR_EN, CLK, RST : STD_LOGIC;
     SIGNAL DATA_IN, OUT_REG_A, OUT_REG_B : unsigned(15 DOWNTO 0);
+    
     CONSTANT period_time : TIME := 100 ns;
     SIGNAL finished : STD_LOGIC := '0';
 
