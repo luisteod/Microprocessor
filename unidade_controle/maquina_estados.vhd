@@ -6,23 +6,19 @@ entity maquina_estados is
     port(
         rst : in std_logic;
         clk : in std_logic;
-        estado : out std_logic
+        estado : inout std_logic := '0'
     );
 end entity;
 
 architecture rtl of maquina_estados is
-    signal estado_sinal: std_logic;
 begin
     process(clk)
     begin
         if rst = '1' then
-            estado_sinal <= '0'; 
+            estado <= '0'; 
         elsif rising_edge(clk) then
-            estado_sinal <= not estado_sinal;
+            estado <= not estado;
         end if;
     end process;
-
-    estado <= estado_sinal;
-    
 end architecture;
 

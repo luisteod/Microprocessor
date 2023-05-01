@@ -13,7 +13,7 @@ end rom ;
 architecture arch of rom is
   type mem is array (0 to 127) of unsigned(13 downto 0);
   constant conteudo_rom : mem := (
-    0 => "00000000000010",
+    0 => "00000000000000",
     1 => "00100000000000",
     2 => "00000000000000",
     3 => "00000000000011",
