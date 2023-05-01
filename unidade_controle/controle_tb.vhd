@@ -34,7 +34,6 @@ begin
         dado => dado_s
     );  
 
-    wr_en_s <= '1';
 
     reset_global : PROCESS
     BEGIN
