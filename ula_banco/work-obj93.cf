@@ -1,7 +1,19 @@
 v 4
-file . "ula_banco.vhd" "aece81c559be5ceaf9d9b5e5099f336a719cb1b0" "20230420023856.189":
-  entity ula_banco at 1( 0) + 0 on 67;
-  architecture rtl of ula_banco at 22( 575) + 0 on 68;
-file . "ula_banco_tb.vhd" "976df5636445bd9a8c3c0fe8f06a32b2a75de376" "20230420023856.286":
-  entity ula_banco_tb at 1( 0) + 0 on 69;
-  architecture rtl of ula_banco_tb at 8( 106) + 0 on 70;
+file . "mux2to1.vhd" "4ec4a9f2efb157feafbf91a1040def12a276cd57" "20230427201329.453":
+  entity mux2to1 at 1( 0) + 0 on 135;
+  architecture rtl of mux2to1 at 14( 274) + 0 on 136;
+file . "registrador.vhd" "bfe11ebd1822d973a7edcda2e2d5e8f3d8a9e097" "20230427201329.284":
+  entity registrador at 1( 0) + 0 on 129;
+  architecture rtl of registrador at 15( 297) + 0 on 130;
+file . "ula.vhd" "b662fd66d57de3dc093da32203c14567988aef2b" "20230427201329.397":
+  entity ula at 1( 0) + 0 on 133;
+  architecture rtl of ula at 14( 289) + 0 on 134;
+file . "ula_banco_tb.vhd" "968f7cce6cce1e61056f5461bfbaf431029eb703" "20230427201329.573":
+  entity ula_banco_tb at 1( 0) + 0 on 139;
+  architecture rtl of ula_banco_tb at 8( 106) + 0 on 140;
+file . "ula_banco.vhd" "d74855cbab55cc24047f82ef9a2db1e44b886cf2" "20230427201329.506":
+  entity ula_banco at 1( 0) + 0 on 137;
+  architecture rtl of ula_banco at 22( 575) + 0 on 138;
+file . "banco_reg.vhd" "3c28c97c8a2504ea4e5b5bb3c002c4cf40210d0f" "20230427201329.338":
+  entity banco_reg at 1( 0) + 0 on 131;
+  architecture rtl of banco_reg at 19( 477) + 0 on 132;

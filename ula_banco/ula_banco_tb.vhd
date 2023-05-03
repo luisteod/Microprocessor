@@ -1,74 +1,103 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
 
-entity ula_banco_tb is
-end entity;
+ENTITY ula_banco_tb IS
+END ENTITY;
 
-architecture rtl of ula_banco_tb is
+ARCHITECTURE rtl OF ula_banco_tb IS
 
-    component ula_banco
-    port(
-        CLK     : in std_logic;
-        RST     : in std_logic;
-        WR_EN   : in std_logic;
-        CONST   : in unsigned(15 downto 0); 
-        
-        DEBUG           : out unsigned(15 downto 0);
-        ULA_OP_BUG      : in unsigned(1 downto 0);
-        REG_IN_A_BUG    : in unsigned(2 downto 0);
-        REG_IN_B_BUG    : in unsigned(2 downto 0);
-        REG_IN_C_BUG    : in unsigned(2 downto 0);
-        MUX_SEL_BUG     : in std_logic
+    COMPONENT ula_banco
+        PORT (
+            CLK : IN STD_LOGIC;
+            RST : IN STD_LOGIC;
+            WR_EN : IN STD_LOGIC;
+            CONST : IN unsigned(15 DOWNTO 0);
+
+            DEBUG : OUT unsigned(15 DOWNTO 0);
+            ULA_OP_BUG : IN unsigned(1 DOWNTO 0);
+            REG_IN_A_BUG : IN unsigned(2 DOWNTO 0);
+            REG_IN_B_BUG : IN unsigned(2 DOWNTO 0);
+            REG_IN_C_BUG : IN unsigned(2 DOWNTO 0);
+            MUX_SEL_BUG : IN STD_LOGIC
+        );
+    END COMPONENT;
+
+    SIGNAL clk, rst, wr_en : STD_LOGIC;
+    SIGNAL const : unsigned(15 DOWNTO 0);
+    SIGNAL ula_out : unsigned(15 DOWNTO 0);
+    SIGNAL ula_op : unsigned(1 DOWNTO 0);
+    SIGNAL reg_in_a : unsigned(2 DOWNTO 0);
+    SIGNAL reg_in_b : unsigned(2 DOWNTO 0);
+    SIGNAL reg_in_c : unsigned(2 DOWNTO 0);
+    SIGNAL mux_sel : STD_LOGIC;
+
+    CONSTANT period_time : TIME := 100 ns;
+    SIGNAL finished : STD_LOGIC := '0';
+
+BEGIN
+
+    uut : ula_banco PORT MAP(
+        CLK => clk,
+        RST => rst,
+        WR_EN => wr_en,
+        CONST => const,
+
+        DEBUG => ula_out,
+        ULA_OP_BUG => ula_op,
+        REG_IN_A_BUG => reg_in_a,
+        REG_IN_B_BUG => reg_in_b,
+        REG_IN_C_BUG => reg_in_c,
+        MUX_SEL_BUG => mux_sel
     );
-    end component;
 
-    signal clk, rst, wr_en : std_logic;
-    signal const  : unsigned(15 downto 0);
-    signal ula_out : unsigned(15 downto 0);
-    signal ula_op : unsigned(1 downto 0);
-    signal reg_in_a : unsigned(2 downto 0);
-    signal reg_in_b : unsigned(2 downto 0);
-    signal reg_in_c : unsigned(2 downto 0);
-    signal mux_sel_bug : std_logic;
+    reset_global : PROCESS
+    BEGIN
+        rst <= '1';
+        WAIT FOR period_time * 2; -- espera 2 clocks, pra garantir
+        rst <= '0';
+        WAIT;
+    END PROCESS;
 
-begin
+    sim_time_proc : PROCESS
+    BEGIN
+        WAIT FOR 10 us; -- <== TEMPO TOTAL DA SIMULAÇÃO!!!
+        finished <= '1';
+        WAIT;
+    END PROCESS sim_time_proc;
 
-    uut : ula_banco port map(
-        CLK   => clk,    
-        RST   => rst, 
-        WR_EN => wr_en,  
-        CONST => const,  
+    clk_proc : PROCESS
+    BEGIN -- gera clock até que sim_time_proc termine
+        WHILE finished /= '1' LOOP
+            clk <= '0';
+            WAIT FOR period_time/2;
+            clk <= '1';
+            WAIT FOR period_time/2;
+        END LOOP;
+        WAIT;
+    END PROCESS clk_proc;
 
-        DEBUG        => ula_out,  
-        ULA_OP_BUG   => ula_op,   
-        REG_IN_A_BUG => reg_in_a,   
-        REG_IN_B_BUG => reg_in_b,  
-        REG_IN_C_BUG => reg_in_c,  
-        MUX_SEL_BUG  => mux_sel_bug
-    );
-
-    process
-    begin
-        clk         <= '0';
-        wr_en       <= '0';
-        rst         <= '0';
-        ula_op      <= "00";
-        reg_in_a    <= "000";
-        reg_in_b    <= "000";
-        reg_in_c    <= "001";
-        mux_sel_bug <= '0';
-        const       <= "0000000000000001";
-        wait for 50 ns;
-        clk   <= '1';
-        wr_en <= '1';
-        rst   <= '0';
-        wait for 50 ns;
-        clk   <= '0';
+    PROCESS
+    BEGIN
         wr_en <= '0';
-        rst   <= '1';
-        wait for 50 ns;
-        wait; 
-    end process;
+        ula_op <= "00";
+        reg_in_a <= "001";
+        reg_in_b <= "000";
+        reg_in_c <= "001";
+        mux_sel <= '0';
+        const <= "0000000000000001";
+        WAIT FOR 200 ns;
+        wr_en <= '1';
+        ula_op <= "00";
+        reg_in_a <= "001";
+        reg_in_b <= "000";
+        reg_in_c <= "001";
+        mux_sel <= '0';
+        const <= "0000000000000001";
+        WAIT FOR 200 ns;
+        wr_en <= '0';
+        WAIT FOR 50 ns;
+        WAIT;
+    END PROCESS;
 
-end architecture;
+END ARCHITECTURE;
