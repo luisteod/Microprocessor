@@ -8,17 +8,14 @@ end controle_tb ;
 architecture arch of controle_tb is
     component controle
     port(
-        wr_en   :   in std_logic;
-        clk     :   in std_logic;
-        rst     :   in std_logic;
-        data_in :   inout unsigned(6 downto 0);
-        data_out:   inout unsigned(6 downto 0) := "0000000";
-        dado    :   out unsigned(13 downto 0)
+        wr_en : IN STD_LOGIC;
+        clk : IN STD_LOGIC;
+        rst : IN STD_LOGIC;
+        data : OUT unsigned(13 DOWNTO 0) --Saida da Rom (instructions)
     );
     end component;
 
     signal wr_en_s, clk_s, rst_s : std_logic;
-    signal data_in_s, data_out_s : unsigned(6 downto 0);
     signal dado_s : unsigned(13 downto 0);
     constant period_time : time := 10 ns;
     signal finished : std_logic := '0';
@@ -29,9 +26,7 @@ begin
         wr_en => wr_en_s,
         clk => clk_s,
         rst => rst_s,
-        data_in => data_in_s,
-        data_out => data_out_s,
-        dado => dado_s
+        data => dado_s
     );  
 
 
