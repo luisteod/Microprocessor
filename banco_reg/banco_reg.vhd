@@ -121,6 +121,9 @@ BEGIN
         data_out_7 WHEN IN_REG_B = "111" ELSE
         "0000000000000000";
 
+
+    wr_0 <= '0'; --Registrado 0 sempre possui 0, é apenas read-only
+
     wr_1 <= '1' WHEN IN_REG_C = "001" AND WR_EN = '1' ELSE
         '0';
     wr_2 <= '1' WHEN IN_REG_C = "010" AND WR_EN = '1' ELSE

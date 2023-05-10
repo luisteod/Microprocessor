@@ -15,11 +15,11 @@ ARCHITECTURE rtl OF ula_banco_tb IS
             CONST : IN unsigned(15 DOWNTO 0);
 
             DEBUG : OUT unsigned(15 DOWNTO 0);
-            ULA_OP_BUG : IN unsigned(1 DOWNTO 0);
-            REG_IN_A_BUG : IN unsigned(2 DOWNTO 0);
-            REG_IN_B_BUG : IN unsigned(2 DOWNTO 0);
-            REG_IN_C_BUG : IN unsigned(2 DOWNTO 0);
-            MUX_SEL_BUG : IN STD_LOGIC
+            ULA_OP : IN unsigned(1 DOWNTO 0);
+            REG_IN_A : IN unsigned(2 DOWNTO 0);
+            REG_IN_B : IN unsigned(2 DOWNTO 0);
+            REG_IN_C : IN unsigned(2 DOWNTO 0);
+            MUX_SEL : IN STD_LOGIC
         );
     END COMPONENT;
 
@@ -44,11 +44,11 @@ BEGIN
         CONST => const,
 
         DEBUG => ula_out,
-        ULA_OP_BUG => ula_op,
-        REG_IN_A_BUG => reg_in_a,
-        REG_IN_B_BUG => reg_in_b,
-        REG_IN_C_BUG => reg_in_c,
-        MUX_SEL_BUG => mux_sel
+        ULA_OP => ula_op,
+        REG_IN_A => reg_in_a,
+        REG_IN_B => reg_in_b,
+        REG_IN_C => reg_in_c,
+        MUX_SEL => mux_sel
     );
 
     reset_global : PROCESS
