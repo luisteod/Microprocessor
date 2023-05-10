@@ -1,6 +1,6 @@
 All instructions contains 14 bits
 
-JUMP : 
+JUMP INSTRUCTIONS: 
 
     opcode = "11"
     addr = "0000000" to "1111111"
@@ -8,7 +8,7 @@ JUMP :
     FORMAT :    
         opcode + "00000" + addr 
 
-R : 
+R INSTRUCTIONS: 
 
     opcode = "00"
 
@@ -32,7 +32,7 @@ R :
         SUB : Receives two Registers(Re1 and Reg2) as operands and put the result of subtraction in Reg3.
         EQUAL : Receives two Registers(Re1 and Reg2) as operands and put the result of equal comparison in Reg3.
 
-I :
+I INSTRUCTIONS:
 
     opcode = "01" 
     constant = "00000" to "11111" (5-bit)
