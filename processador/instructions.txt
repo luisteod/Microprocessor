@@ -15,22 +15,24 @@ R :
     function = "00" to "11"
         where :
             "00" => SUM 
-            "01" => GREATHER comparison
+            "01" => GREATER comparison
             "10" => SUB
             "11" => EQUAL comparison 
 
     Reg1 = "000" to "111"
     Reg2 = "000" to "111"
-    Reg3 = "001" to "111"  **WARNING : Reg "000" is READ-ONLY so can't be assigned any value!!
+    Reg3 = "001" to "111"  
+
+    **WARNING : Reg "000" is READ-ONLY so can't be assigned any value!!
 
     FORMAT :
         opcode + Reg1 + Reg2 + Reg3 + function
 
     Description : 
         SUM : Receives two Registers(Reg1 and Reg2) as operands and put result of sum in Reg3.
-        GREATHER : Receives two Registers(Reg1 and Reg2) as operands and put result of greather than comparison in Reg3.
-        SUB : Receives two Registers(Re1 and Reg2) as operands and put the result of subtraction in Reg3.
-        EQUAL : Receives two Registers(Re1 and Reg2) as operands and put the result of equal comparison in Reg3.
+        GREATER : Receives two Registers(Reg1 and Reg2) as operands and put result of greater than comparison in Reg3.
+        SUB : Receives two Registers(Reg1 and Reg2) as operands and put the result of subtraction in Reg3.
+        EQUAL : Receives two Registers(Reg1 and Reg2) as operands and put the result of equal comparison in Reg3.
 
 I :
 
@@ -38,13 +40,21 @@ I :
     constant = "00000" to "11111" (5-bit)
     function = "00" to "11"
         where : 
-            "00" => sum 
-            "01" => greater comparison
-            "10" => sub
-            "11" => equal comparison 
+            "00" => SUM 
+            "01" => GREATER comparison
+            "10" => SUB
+            "11" => EQUAL comparison 
     
     Reg1 = "000" to "111"
-    Reg3 = "001" to "111"  **WARNING : Reg "000" is READ-ONLY so can't be assigned any value!!
+    Reg3 = "001" to "111"  
+    
+    **WARNING : Reg "000" is READ-ONLY so can't be assigned any value!!
     
     FORMAT : 
         opcode + Reg1 + constant + Reg3
+
+    Description : 
+        SUM : Receives one Register(Reg1) and a constant as operands and put result of sum in Reg3.
+        GREATER : Receives one Register(Reg1) and a constant as operands and put result of greater than comparison in Reg3.
+        SUB : Receives one Register(Reg1) and a constant as operands and put the result of subtraction in Reg3.
+        EQUAL : Receives one Register(Reg1) and a constant as operands and put the result of equal comparison in Reg3.    
