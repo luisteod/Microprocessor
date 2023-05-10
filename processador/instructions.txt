@@ -6,7 +6,7 @@ JUMP :
     addr = "0000000" to "1111111"
 
     FORMAT :    
-        opcode + "000" + addr 
+        opcode + "00000" + addr 
 
 R : 
 
