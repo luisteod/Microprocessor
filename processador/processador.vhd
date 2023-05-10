@@ -52,7 +52,8 @@ ARCHITECTURE rtl OF processador IS
         );
     END COMPONENT;
 
-    SIGNAL wr_en_s : STD_LOGIC := '1'; --Write enable always active
+    SIGNAL wr_en_pc_s : STD_LOGIC ; 
+    signal wr_en_instr_reg_s : std_logic;
     SIGNAL data_rom_instrReg_s : unsigned(13 DOWNTO 0); --Liga entrada do registrador de instrução na saída da ROM
     SIGNAL pc_rom_s : unsigned(6 DOWNTO 0); --Liga a saída do PC na entrada da ROM
     SIGNAL pc_in_s : unsigned(6 DOWNTO 0) := "0000000";
@@ -60,8 +61,6 @@ ARCHITECTURE rtl OF processador IS
     SIGNAL jump_addr_s : unsigned(6 DOWNTO 0);
     SIGNAL jump_en_s : STD_LOGIC;
     SIGNAL instr_s : unsigned(13 DOWNTO 0); --Intruction, that is the out of Instruction Register
-    SIGNAL clk_pc_s : STD_LOGIC;
-    SIGNAL clk_instr_reg_s : STD_LOGIC;
     SIGNAL estado_s : unsigned(1 DOWNTO 0);
 
     CONSTANT fetch_state : unsigned(1 DOWNTO 0) := "00"; --Constante que define o estado de fetch
@@ -69,8 +68,8 @@ ARCHITECTURE rtl OF processador IS
 
 BEGIN
     pc_comp : pc PORT MAP(
-        wr_en => wr_en_s,
-        clk => clk_pc_s,
+        wr_en => wr_en_pc_s,
+        clk => clk,
         rst => rst,
         data_in => pc_in_s,
         data_out => pc_rom_s
@@ -85,8 +84,8 @@ BEGIN
     --Registrador que armazena a saída da rom
     instr_reg_comp : registrador PORT MAP(
         rst => rst,
-        clk => clk_instr_reg_s,
-        wr_en => wr_en_s,
+        clk => clk,
+        wr_en => wr_en_instr_reg_s,
         data_in => data_rom_instrReg_s,
         data_out => instr_s
     );
@@ -102,11 +101,11 @@ BEGIN
     Estado <= estado_s;
 
     --FETCH-------------------------
-    clk_pc_s <= '1' WHEN estado_s = fetch_state ELSE
+    wr_en_pc_s <= '1' WHEN estado_s = fetch_state ELSE
         '0';
 
     --DECODE------------------------
-    clk_instr_reg_s <= '1' WHEN estado_s = decode_state ELSE
+    wr_en_instr_reg_s <= '1' WHEN estado_s = decode_state ELSE
         '0';
 
     opcode_s <= instr_s(13 DOWNTO 10); --Catch the opcode from instruction

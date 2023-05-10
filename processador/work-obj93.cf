@@ -1,19 +1,19 @@
 v 4
-file . "processador_tb.vhd" "63056fbcd1392b543744aa073242fdfa16a0be3d" "20230510190420.740":
-  entity processador_tb at 1( 0) + 0 on 107;
-  architecture rtl of processador_tb at 8( 108) + 0 on 108;
-file . "processador.vhd" "ed892ab4033fc6d5283fc2c87f5ab6d33fa108dc" "20230510190420.679":
-  entity processador at 1( 0) + 0 on 105;
-  architecture rtl of processador at 18( 445) + 0 on 106;
-file . "pc.vhd" "bb0ca019d3a4ebf90938a4fa92df28e69371794b" "20230510190420.572":
-  entity pc at 1( 0) + 0 on 101;
-  architecture arch of pc at 15( 305) + 0 on 102;
-file . "registrador.vhd" "97c83f0eb05744e3227bf7fc895ce7df5676d79d" "20230510190420.462":
-  entity registrador at 1( 0) + 0 on 97;
-  architecture rtl of registrador at 15( 297) + 0 on 98;
-file . "maq_estados.vhd" "d8603d0b44956e713e749435461c200a664160c3" "20230510190420.516":
-  entity maq_estados at 1( 0) + 0 on 99;
-  architecture a_maq_estados of maq_estados at 11( 197) + 0 on 100;
-file . "rom.vhd" "b6314b5a5564ade79dc91c42bead9912b5c4b440" "20230510190420.625":
-  entity rom at 1( 0) + 0 on 103;
-  architecture arch of rom at 13( 248) + 0 on 104;
+file . "rom.vhd" "b6314b5a5564ade79dc91c42bead9912b5c4b440" "20230510192311.377":
+  entity rom at 1( 0) + 0 on 125;
+  architecture arch of rom at 13( 248) + 0 on 126;
+file . "maq_estados.vhd" "d8603d0b44956e713e749435461c200a664160c3" "20230510192311.267":
+  entity maq_estados at 1( 0) + 0 on 121;
+  architecture a_maq_estados of maq_estados at 11( 197) + 0 on 122;
+file . "registrador.vhd" "97c83f0eb05744e3227bf7fc895ce7df5676d79d" "20230510192311.213":
+  entity registrador at 1( 0) + 0 on 119;
+  architecture rtl of registrador at 15( 297) + 0 on 120;
+file . "pc.vhd" "bb0ca019d3a4ebf90938a4fa92df28e69371794b" "20230510192311.323":
+  entity pc at 1( 0) + 0 on 123;
+  architecture arch of pc at 15( 305) + 0 on 124;
+file . "processador.vhd" "7c1ebd10ce306b34075ecc22996328bd17f4ed27" "20230510192311.435":
+  entity processador at 1( 0) + 0 on 127;
+  architecture rtl of processador at 18( 445) + 0 on 128;
+file . "processador_tb.vhd" "63056fbcd1392b543744aa073242fdfa16a0be3d" "20230510192311.497":
+  entity processador_tb at 1( 0) + 0 on 129;
+  architecture rtl of processador_tb at 8( 108) + 0 on 130;
