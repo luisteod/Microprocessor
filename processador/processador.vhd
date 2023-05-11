@@ -141,14 +141,7 @@ BEGIN
     PC_out <= pc_rom_s;
     Instr <= instr_s;
     Estado <= estado_s;
-    --ULA_out <= ula_out_debug_s;
-
-    PROCESS (estado_s)
-    BEGIN
-        IF (rising_edge(estado_s(1))) then
-            ULA_out <= ula_out_debug_s;
-        END IF;
-    END PROCESS;
+    ULA_out <= ula_out_debug_s;
 
     --FETCH-------------------------
     wr_en_pc_s <= '1' WHEN estado_s = fetch_state ELSE
