@@ -11,10 +11,8 @@ ARCHITECTURE rtl OF processador_tb IS
         rst : IN STD_LOGIC;
         clk : IN STD_LOGIC;
         Estado : OUT unsigned(1 DOWNTO 0);
-        PC_out : OUT unsigned(6 DOWNTO 0);
+        PC_out : OUT signed(7 DOWNTO 0);
         Instr : OUT unsigned(13 DOWNTO 0);
-        -- Reg1 : OUT unsigned(15 DOWNTO 0);
-        -- Reg2 : OUT unsigned(15 DOWNTO 0);
         ULA_out : OUT unsigned(15 DOWNTO 0)
         );
     END COMPONENT;
@@ -23,7 +21,7 @@ ARCHITECTURE rtl OF processador_tb IS
     signal clk  : std_logic;
     signal rst : std_logic;
     signal Estado : unsigned(1 downto 0);
-    signal PC_out : unsigned(6 downto 0);
+    signal PC_out : signed(7 downto 0);
     signal Instr : unsigned(13 downto 0);
     signal ula_out_debug : unsigned(15 downto 0);
 

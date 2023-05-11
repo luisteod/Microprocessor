@@ -7,10 +7,8 @@ ENTITY processador IS
         rst : IN STD_LOGIC;
         clk : IN STD_LOGIC;
         Estado : OUT unsigned(1 DOWNTO 0);
-        PC_out : OUT unsigned(6 DOWNTO 0);
+        PC_out : OUT signed(7 DOWNTO 0);
         Instr : OUT unsigned(13 DOWNTO 0);
-        --Reg1 : OUT unsigned(15 DOWNTO 0);
-        -- Reg2 : OUT unsigned(15 DOWNTO 0);
         ULA_out : OUT unsigned(15 DOWNTO 0)
     );
 END ENTITY;
@@ -32,8 +30,8 @@ ARCHITECTURE rtl OF processador IS
             wr_en : IN STD_LOGIC;
             clk : IN STD_LOGIC;
             rst : IN STD_LOGIC;
-            data_in : IN unsigned(6 DOWNTO 0);
-            data_out : OUT unsigned(6 DOWNTO 0) := "0000000"
+            data_in : IN signed(7 DOWNTO 0);
+            data_out : OUT signed(7 DOWNTO 0) 
         );
     END COMPONENT;
 
@@ -71,8 +69,8 @@ ARCHITECTURE rtl OF processador IS
     SIGNAL wr_en_pc_s : STD_LOGIC ; 
     signal wr_en_instr_reg_s : std_logic;
     SIGNAL data_rom_instrReg_s : unsigned(13 DOWNTO 0); --Liga entrada do registrador de instrução na saída da ROM
-    SIGNAL pc_rom_s : unsigned(6 DOWNTO 0); --Liga a saída do PC na entrada da ROM
-    SIGNAL pc_in_s : unsigned(6 DOWNTO 0) := "0000000";
+    SIGNAL pc_rom_s : signed(7 DOWNTO 0); --Liga a saída do PC na entrada da ROM
+    SIGNAL pc_in_s : signed(7 DOWNTO 0);
     SIGNAL opcode_s : unsigned(1 DOWNTO 0);
     SIGNAL jump_addr_s : unsigned(6 DOWNTO 0);
     SIGNAL jump_en_s : STD_LOGIC;
@@ -105,7 +103,7 @@ BEGIN
 
     rom_comp : rom PORT MAP(
         clock => clk,
-        endereco => pc_rom_s,
+        endereco => unsigned(pc_rom_s(6 downto 0)), --Discosiderating negative numbers
         dado => data_rom_instrReg_s
     );
 
@@ -177,8 +175,8 @@ BEGIN
         '0'; --Execute only if in right state and if opcode is of R or I instruction
         
     --jump execute
-    pc_in_s <= "0000000" WHEN pc_rom_s = "1111111" ELSE --When PC achieves the maximum
-        jump_addr_s WHEN jump_en_s = '1' ELSE
-        pc_rom_s + "0000001";
+    pc_in_s <= "11111111" WHEN pc_rom_s = "01111111" ELSE --When PC achieves the maximum
+        signed("0"&jump_addr_s) WHEN jump_en_s = '1' ELSE
+        pc_rom_s + "00000001";
 
 END ARCHITECTURE;

@@ -7,19 +7,19 @@ entity pc is
     wr_en   :   in std_logic;
     clk     :   in std_logic;
     rst     :   in std_logic;
-    data_in :   in unsigned(6 downto 0);
-    data_out:   out unsigned(6 downto 0) := "0000000"
+    data_in :   in signed(7 downto 0);
+    data_out:   out signed(7 downto 0) 
   ) ;
 end pc ; 
 
 architecture arch of pc is
-  signal registro : unsigned(6 downto 0) := "0000000";
+  signal registro : signed(7 downto 0) := "11111111";
   begin
   data_out <= registro;
       process(clk,rst)
       begin
           if rst = '1' then
-              registro <= "0000000"; 
+              registro <= "11111111"; 
           elsif rising_edge(clk) then
               if wr_en = '1' then
                   registro <= data_in;
