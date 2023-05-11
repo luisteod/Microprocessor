@@ -142,7 +142,14 @@ BEGIN
     PC_out <= pc_rom_s;
     Instr <= instr_s;
     Estado <= estado_s;
-    ULA_out <= ula_out_debug_s;
+    --ULA_out <= ula_out_debug_s;
+
+    PROCESS (estado_s)
+    BEGIN
+        IF (rising_edge(estado_s(1))) then
+            ULA_out <= ula_out_debug_s;
+        END IF;
+    END PROCESS;
 
     --FETCH-------------------------
     clk_pc_s <= '1' WHEN estado_s = fetch_state ELSE
@@ -174,10 +181,8 @@ BEGIN
     --EXECUTE-----------------------
 
     --R or I execute
-    clk_ula_banco_s <= '1' WHEN estado_s = execute_state and (opcode_s = "00" or opcode_s = "01") ELSE
+    clk_ula_banco_s <= '1' WHEN estado_s = execute_state AND (opcode_s = "00" OR opcode_s = "01") ELSE
         '0'; --Execute only if in right state and if opcode is of R or I instruction
-    
-
     --jump execute
     pc_in_s <= "0000000" WHEN pc_rom_s = "1111111" ELSE --When PC achieves the maximum
         jump_addr_s WHEN jump_en_s = '1' ELSE

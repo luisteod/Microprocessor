@@ -1,34 +1,34 @@
 v 4
-file . "ula_banco.vhd" "d6c047c0ec0dbafb2a23f141f4ef1cde640cbc0b" "20230510223913.539":
-  entity ula_banco at 1( 0) + 0 on 333;
-  architecture rtl of ula_banco at 21( 532) + 0 on 334;
-file . "mux2to1.vhd" "4ec4a9f2efb157feafbf91a1040def12a276cd57" "20230510223913.257":
-  entity mux2to1 at 1( 0) + 0 on 323;
-  architecture rtl of mux2to1 at 14( 274) + 0 on 324;
-file . "processador_tb.vhd" "d11f72faa9b58693dbea5fb3b0f2f4bcdeba02d0" "20230510223913.740":
-  entity processador_tb at 1( 0) + 0 on 339;
-  architecture rtl of processador_tb at 8( 108) + 0 on 340;
-file . "processador.vhd" "679645bd298684df8880715a6842fc5c67428ed1" "20230510223913.663":
-  entity processador at 1( 0) + 0 on 337;
-  architecture rtl of processador at 18( 441) + 0 on 338;
-file . "pc.vhd" "bb0ca019d3a4ebf90938a4fa92df28e69371794b" "20230510223913.370":
-  entity pc at 1( 0) + 0 on 327;
-  architecture arch of pc at 15( 305) + 0 on 328;
-file . "maq_estados.vhd" "d8603d0b44956e713e749435461c200a664160c3" "20230510223913.315":
-  entity maq_estados at 1( 0) + 0 on 325;
-  architecture a_maq_estados of maq_estados at 11( 197) + 0 on 326;
-file . "rom.vhd" "211e0e861a2f9aa8e9f1f2d85fab1a10fa120837" "20230510223913.426":
-  entity rom at 1( 0) + 0 on 329;
-  architecture arch of rom at 13( 211) + 0 on 330;
-file . "banco_reg.vhd" "ff27320196cb10138a0745fd6700c3d17f6b1461" "20230510223913.198":
-  entity banco_reg at 1( 0) + 0 on 321;
-  architecture rtl of banco_reg at 19( 477) + 0 on 322;
-file . "ula.vhd" "b662fd66d57de3dc093da32203c14567988aef2b" "20230510223913.481":
-  entity ula at 1( 0) + 0 on 331;
-  architecture rtl of ula at 14( 289) + 0 on 332;
-file . "registrador.vhd" "bfe11ebd1822d973a7edcda2e2d5e8f3d8a9e097" "20230510223913.141":
-  entity registrador at 1( 0) + 0 on 319;
-  architecture rtl of registrador at 15( 297) + 0 on 320;
-file . "instr_reg.vhd" "d669ba883e8d19da16222263792cdfc6ceceef0b" "20230510223913.606":
-  entity instr_reg at 1( 0) + 0 on 335;
-  architecture rtl of instr_reg at 15( 295) + 0 on 336;
+file . "instr_reg.vhd" "d669ba883e8d19da16222263792cdfc6ceceef0b" "20230511003121.653":
+  entity instr_reg at 1( 0) + 0 on 413;
+  architecture rtl of instr_reg at 15( 295) + 0 on 414;
+file . "registrador.vhd" "bfe11ebd1822d973a7edcda2e2d5e8f3d8a9e097" "20230511003121.182":
+  entity registrador at 1( 0) + 0 on 397;
+  architecture rtl of registrador at 15( 297) + 0 on 398;
+file . "ula.vhd" "b662fd66d57de3dc093da32203c14567988aef2b" "20230511003121.529":
+  entity ula at 1( 0) + 0 on 409;
+  architecture rtl of ula at 14( 289) + 0 on 410;
+file . "banco_reg.vhd" "ff27320196cb10138a0745fd6700c3d17f6b1461" "20230511003121.237":
+  entity banco_reg at 1( 0) + 0 on 399;
+  architecture rtl of banco_reg at 19( 477) + 0 on 400;
+file . "rom.vhd" "211e0e861a2f9aa8e9f1f2d85fab1a10fa120837" "20230511003121.468":
+  entity rom at 1( 0) + 0 on 407;
+  architecture arch of rom at 13( 211) + 0 on 408;
+file . "maq_estados.vhd" "d8603d0b44956e713e749435461c200a664160c3" "20230511003121.360":
+  entity maq_estados at 1( 0) + 0 on 403;
+  architecture a_maq_estados of maq_estados at 11( 197) + 0 on 404;
+file . "pc.vhd" "bb0ca019d3a4ebf90938a4fa92df28e69371794b" "20230511003121.414":
+  entity pc at 1( 0) + 0 on 405;
+  architecture arch of pc at 15( 305) + 0 on 406;
+file . "processador.vhd" "89bbad91a98345c7e25c2d5ea69184560b0228de" "20230511003121.707":
+  entity processador at 1( 0) + 0 on 415;
+  architecture rtl of processador at 18( 441) + 0 on 416;
+file . "processador_tb.vhd" "d11f72faa9b58693dbea5fb3b0f2f4bcdeba02d0" "20230511003121.786":
+  entity processador_tb at 1( 0) + 0 on 417;
+  architecture rtl of processador_tb at 8( 108) + 0 on 418;
+file . "mux2to1.vhd" "4ec4a9f2efb157feafbf91a1040def12a276cd57" "20230511003121.299":
+  entity mux2to1 at 1( 0) + 0 on 401;
+  architecture rtl of mux2to1 at 14( 274) + 0 on 402;
+file . "ula_banco.vhd" "d6c047c0ec0dbafb2a23f141f4ef1cde640cbc0b" "20230511003121.587":
+  entity ula_banco at 1( 0) + 0 on 411;
+  architecture rtl of ula_banco at 21( 532) + 0 on 412;
