@@ -1,0 +1,60 @@
+All instructions contains 14 bits
+
+JUMP INSTRUCTIONS: 
+
+    opcode = "11"
+    addr = "0000000" to "1111111"
+
+    FORMAT :    
+        opcode + "00000" + addr 
+
+R INSTRUCTIONS: 
+
+    opcode = "00"
+
+    function = "00" to "11"
+        where :
+            "00" => SUM 
+            "01" => GREATER comparison
+            "10" => SUB
+            "11" => EQUAL comparison 
+
+    Reg1 = "000" to "111"
+    Reg2 = "000" to "111"
+    Reg3 = "001" to "111"  
+
+    **WARNING : Reg "000" is READ-ONLY so can't be assigned any value!!
+
+    FORMAT :
+        opcode + Reg1 + Reg2 + Reg3 + function
+
+    Description : 
+        SUM : Receives two Registers(Reg1 and Reg2) as operands and put result of sum in Reg3.
+        GREATER : Receives two Registers(Reg1 and Reg2) as operands and put result of greater than comparison in Reg3.
+        SUB : Receives two Registers(Reg1 and Reg2) as operands and put the result of subtraction in Reg3.
+        EQUAL : Receives two Registers(Reg1 and Reg2) as operands and put the result of equal comparison in Reg3.
+
+I INSTRUCTIONS:
+
+    opcode = "01" 
+    constant = "00000" to "11111" (5-bit)
+    function = "00" to "11"
+        where : 
+            "00" => SUM 
+            "01" => GREATER comparison
+            "10" => SUB
+            "11" => EQUAL comparison 
+    
+    Reg1 = "000" to "111"
+    Reg3 = "001" to "111"  
+    
+    **WARNING : Reg "000" is READ-ONLY so can't be assigned any value!!
+    
+    FORMAT : 
+        opcode + Reg1 + constant + Reg3
+
+    Description : 
+        SUM : Receives one Register(Reg1) and a constant as operands and put result of sum in Reg3.
+        GREATER : Receives one Register(Reg1) and a constant as operands and put result of greater than comparison in Reg3.
+        SUB : Receives one Register(Reg1) and a constant as operands and put the result of subtraction in Reg3.
+        EQUAL : Receives one Register(Reg1) and a constant as operands and put the result of equal comparison in Reg3.    

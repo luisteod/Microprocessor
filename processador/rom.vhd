@@ -1,37 +1,48 @@
-library ieee ;
-    use ieee.std_logic_1164.all ;
-    use ieee.numeric_std.all ;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
-entity rom is
-  port (
-        clock     : in std_logic;
-        endereco  : in unsigned(6 downto 0);
-        dado      : out unsigned(13 downto 0) 
-  ) ;
-end rom ; 
+ENTITY rom IS
+  PORT (
+    clock : IN STD_LOGIC;
+    endereco : IN unsigned(6 DOWNTO 0);
+    dado : OUT unsigned(13 DOWNTO 0)
+  );
+END rom;
 
-architecture arch of rom is
-  type mem is array (0 to 127) of unsigned(13 downto 0);
-  constant conteudo_rom : mem := (
-    0 => "00000000000000",
-    1 => "11010000000010",
-    2 => "11110000000100", --Go to 4
-    3 => "11110000000000",
-    4 => "11110000000010",
-    5 => "00000000000010",
-    6 => "00111100000011",
-    7 => "00000000000010",
-    8 => "00000000000010",
+ARCHITECTURE arch OF rom IS
+  TYPE mem IS ARRAY (0 TO 127) OF unsigned(13 DOWNTO 0);
+  CONSTANT conteudo_rom : mem := (
+    0 => "00000000000000", --NOP
+    1 => "01" & "000" & "0101" & "011" & "00", --Carrega R3 (o registrador 3) com o valor 5
+    2 => "01" & "000" & "1000" & "100" & "00", --Carrega R4 com 8
+    3 => "00" & "011" & "100"& "0" & "101" & "00", --Soma R3 com R4 e guarda em R5
+    4 => "01" & "101" & "0001" & "101" & "10", --Subtrai 1 de R5
+    5 => "11" & "00000" & "0010100", --Salta para o endereço 20
+    6 => "00000000000000",
+    7 => "00000000000000",
+    8 => "00000000000000",
     9 => "00000000000000",
     10 => "00000000000000",
-    others => (others=>'0')
- );
-begin
-  process(clock)
-    begin
-      if(rising_edge(clock)) then
-        dado <= conteudo_rom(to_integer(endereco));
-      end if;
-  end process;
+    11 => "00000000000000",
+    12 => "00000000000000",
+    13 => "00000000000000",
+    14 => "00000000000000",
+    15 => "00000000000000",
+    16 => "00000000000000",
+    17 => "00000000000000",
+    18 => "00000000000000",
+    19 => "00000000000000",
+    20 => "00" & "000" & "101" & "0" & "011" & "00", --No endereço 20, copia R5 para R3 
+    21 => "11" & "00000" & "0000011", --Salta para a terceira instrução desta lista (R5 <= R3+R4)
+    OTHERS => (OTHERS => '0')
+  );
+BEGIN
+  PROCESS (clock)
+  BEGIN
+    IF (rising_edge(clock)) THEN
+      dado <= conteudo_rom(to_integer(endereco));
+    END IF;
+  END PROCESS;
 
-end architecture ;
+END ARCHITECTURE;

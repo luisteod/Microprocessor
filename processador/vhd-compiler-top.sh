@@ -5,6 +5,12 @@ read tipo
 ghdl -a registrador.vhd
 ghdl -e registrador
 
+ghdl -a banco_reg.vhd
+ghdl -e banco_reg
+
+ghdl -a mux2to1.vhd
+ghdl -e mux2to1
+
 ghdl -a maq_estados.vhd
 ghdl -e maq_estados
 
@@ -13,6 +19,15 @@ ghdl -e pc
 
 ghdl -a rom.vhd
 ghdl -e rom
+
+ghdl -a ula.vhd
+ghdl -e ula
+
+ghdl -a ula_banco.vhd
+ghdl -e ula_banco
+
+ghdl -a instr_reg.vhd
+ghdl -e instr_reg
 
 ghdl -a processador.vhd
 ghdl -e processador
