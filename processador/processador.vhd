@@ -31,7 +31,7 @@ ARCHITECTURE rtl OF processador IS
             clk : IN STD_LOGIC;
             rst : IN STD_LOGIC;
             data_in : IN signed(7 DOWNTO 0);
-            data_out : OUT signed(7 DOWNTO 0) 
+            data_out : OUT signed(7 DOWNTO 0)
         );
     END COMPONENT;
 
@@ -65,18 +65,32 @@ ARCHITECTURE rtl OF processador IS
         );
     END COMPONENT;
 
-    SIGNAL wr_en_ula_banco_s : STD_LOGIC; -- := '1'; --Write enable always active
-    SIGNAL wr_en_pc_s : STD_LOGIC ; 
-    signal wr_en_instr_reg_s : std_logic;
+    COMPONENT controle
+        PORT (
+            estado : IN unsigned(1 DOWNTO 0);
+            instr : IN unsigned(13 DOWNTO 0);
+            pc_rom : IN signed(7 DOWNTO 0); --Liga a saída do PC na entrada da ROM
+            wr_en_pc : OUT STD_LOGIC;
+            wr_en_instr_reg : OUT STD_LOGIC;
+            wr_en_ula_banco : OUT STD_LOGIC;
+            ula_op : OUT unsigned(1 DOWNTO 0);
+            sel_reg_or_const : OUT STD_LOGIC;
+            addr_reg1 : OUT unsigned(2 DOWNTO 0);
+            addr_reg2 : OUT unsigned(2 DOWNTO 0);
+            addr_reg3 : OUT unsigned(2 DOWNTO 0);
+            const : OUT unsigned(15 DOWNTO 0);
+            pc_in : OUT signed(7 DOWNTO 0)
+        );
+    END COMPONENT;
+
+    SIGNAL wr_en_ula_banco_s : STD_LOGIC; 
+    SIGNAL wr_en_pc_s : STD_LOGIC;
+    SIGNAL wr_en_instr_reg_s : STD_LOGIC;
     SIGNAL data_rom_instrReg_s : unsigned(13 DOWNTO 0); --Liga entrada do registrador de instrução na saída da ROM
     SIGNAL pc_rom_s : signed(7 DOWNTO 0); --Liga a saída do PC na entrada da ROM
     SIGNAL pc_in_s : signed(7 DOWNTO 0);
-    SIGNAL opcode_s : unsigned(1 DOWNTO 0);
-    SIGNAL jump_addr_s : unsigned(6 DOWNTO 0);
-    SIGNAL jump_en_s : STD_LOGIC;
     SIGNAL instr_s : unsigned(13 DOWNTO 0); --Intruction, that is the out of Instruction Register
     SIGNAL estado_s : unsigned(1 DOWNTO 0);
-    SIGNAL func_s : unsigned(1 DOWNTO 0);
     SIGNAL Reg1_s : unsigned(2 DOWNTO 0);
     SIGNAL Reg2_s : unsigned(2 DOWNTO 0);
     SIGNAL Reg3_s : unsigned(2 DOWNTO 0);
@@ -84,13 +98,6 @@ ARCHITECTURE rtl OF processador IS
     SIGNAL ula_op_s : unsigned(1 DOWNTO 0);
     SIGNAL sel_reg_or_const_s : STD_LOGIC;
     SIGNAL ula_out_debug_s : unsigned(15 DOWNTO 0);
-
-    CONSTANT R_mux_sel : STD_LOGIC := '1';
-    CONSTANT I_mux_sel : STD_LOGIC := '0';
-
-    CONSTANT fetch_state : unsigned(1 DOWNTO 0) := "00"; --Constante que define o estado de fetch
-    CONSTANT decode_state : unsigned(1 DOWNTO 0) := "01"; --Constant that defines the decode state
-    CONSTANT execute_state : unsigned(1 DOWNTO 0) := "10"; --Constant that defines the execute state
 
 BEGIN
     pc_comp : pc PORT MAP(
@@ -103,7 +110,7 @@ BEGIN
 
     rom_comp : rom PORT MAP(
         clock => clk,
-        endereco => unsigned(pc_rom_s(6 downto 0)), --Discosiderating negative numbers
+        endereco => unsigned(pc_rom_s(6 DOWNTO 0)), --Discosiderating negative numbers
         dado => data_rom_instrReg_s
     );
 
@@ -124,7 +131,7 @@ BEGIN
 
     ula_banco_comp : ula_banco PORT MAP(
 
-        CLK => clk, --_ula_banco_s, ------------
+        CLK => clk,
         RST => rst,
         WR_EN => wr_en_ula_banco_s,
         CONST => const_s,
@@ -136,47 +143,26 @@ BEGIN
         MUX_SEL => sel_reg_or_const_s
     );
 
+    controle_comp : controle PORT MAP(
+
+        estado => estado_s,
+        instr => instr_s,
+        pc_rom => pc_rom_s,
+        wr_en_pc => wr_en_pc_s,
+        wr_en_instr_reg => wr_en_instr_reg_s,
+        wr_en_ula_banco => wr_en_ula_banco_s,
+        ula_op => ula_op_s,
+        sel_reg_or_const => sel_reg_or_const_s,
+        addr_reg1 => Reg1_s,
+        addr_reg2 => Reg2_s,
+        addr_reg3 => Reg3_s,
+        const => const_s,
+        pc_in => pc_in_s
+    );
+
     PC_out <= pc_rom_s;
     Instr <= instr_s;
     Estado <= estado_s;
     ULA_out <= ula_out_debug_s;
-
-    --FETCH-------------------------
-    wr_en_pc_s <= '1' WHEN estado_s = fetch_state ELSE
-        '0';
-
-    --DECODE------------------------
-    wr_en_instr_reg_s <= '1' WHEN estado_s = decode_state ELSE
-        '0';
-
-    --General decode (jump, R, I)
-    opcode_s <= instr_s(13 DOWNTO 12); --Catch the opcode from instruction
-
-    --Jump decode
-    jump_addr_s <= instr_s(6 DOWNTO 0); --Catch the addr for jump in the instruction
-    jump_en_s <= '1' WHEN opcode_s = "11" ELSE
-        '0'; --Jumps is enable when opcode is "11"
-
-    --R and I decode
-    func_s <= instr_s(1 DOWNTO 0);
-    Reg1_s <= instr_s(11 DOWNTO 9);
-    Reg2_s <= instr_s(8 DOWNTO 6);
-    const_s <= "000000000000" & instr_s(8 DOWNTO 5); --Concatenate to form 16 bit word for Register
-    Reg3_s <= instr_s(4 DOWNTO 2);
-
-    ula_op_s <= func_s; --Send instruction to ula
-    sel_reg_or_const_s <= R_mux_sel WHEN opcode_s = "00" ELSE
-        I_mux_sel; --Tells when ULA have to catch a Reg or Constant at second operand, basically if is of R type o I type instruction
-
-    --EXECUTE-----------------------
-
-    --R or I execute
-    wr_en_ula_banco_s <= '1' WHEN estado_s = execute_state AND (opcode_s = "00" OR opcode_s = "01") ELSE
-        '0'; --Execute only if in right state and if opcode is of R or I instruction
-        
-    --jump execute
-    pc_in_s <= "11111111" WHEN pc_rom_s = "01111111" ELSE --When PC achieves the maximum
-        signed("0"&jump_addr_s) WHEN jump_en_s = '1' ELSE
-        pc_rom_s + "00000001";
 
 END ARCHITECTURE;

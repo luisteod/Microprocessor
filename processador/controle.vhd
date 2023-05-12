@@ -16,7 +16,7 @@ ENTITY controle IS
         addr_reg2 : OUT unsigned(2 DOWNTO 0);
         addr_reg3 : OUT unsigned(2 DOWNTO 0);
         const : OUT unsigned(15 DOWNTO 0);
-        pc_in : OUT signed(7 DOWNTO 0);
+        pc_in : OUT signed(7 DOWNTO 0)
     );
 END controle;
 ARCHITECTURE arch OF controle IS
@@ -24,10 +24,7 @@ ARCHITECTURE arch OF controle IS
     SIGNAL opcode : unsigned(1 DOWNTO 0);
     SIGNAL jump_addr : unsigned(6 DOWNTO 0);
     SIGNAL jump_en : STD_LOGIC;
-    SIGNAL instr : unsigned(13 DOWNTO 0);
-    SIGNAL estado : unsigned(1 DOWNTO 0);
     SIGNAL func : unsigned(1 DOWNTO 0);
-    SIGNAL data_rom_instrReg : unsigned(13 DOWNTO 0); --Liga entrada do registrador de instrução na saída da ROM
 
     CONSTANT R_mux_sel : STD_LOGIC := '1';
     CONSTANT I_mux_sel : STD_LOGIC := '0';
@@ -55,10 +52,10 @@ BEGIN
 
     --R and I decode
     func <= instr(1 DOWNTO 0);
-    Reg1 <= instr(11 DOWNTO 9);
-    Reg2 <= instr(8 DOWNTO 6);
+    addr_reg1 <= instr(11 DOWNTO 9);
+    addr_reg2 <= instr(8 DOWNTO 6);
     const <= "000000000000" & instr(8 DOWNTO 5); --Concatenate to form 16 bit word for Register
-    Reg3 <= instr(4 DOWNTO 2);
+    addr_reg3 <= instr(4 DOWNTO 2);
 
     ula_op <= func;
 
@@ -70,6 +67,6 @@ BEGIN
 
     pc_in <= "11111111" WHEN pc_rom = "01111111" ELSE --When PC achieves the maximum
         signed("0" & jump_addr) WHEN jump_en = '1' ELSE
-        pc_rom + "00000001"
+        pc_rom + "00000001";
 
-    END ARCHITECTURE;
+END ARCHITECTURE;

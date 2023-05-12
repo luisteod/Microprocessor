@@ -29,6 +29,9 @@ ghdl -e ula_banco
 ghdl -a instr_reg.vhd
 ghdl -e instr_reg
 
+ghdl -a controle.vhd
+ghdl -e controle
+
 ghdl -a processador.vhd
 ghdl -e processador
 
