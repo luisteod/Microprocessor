@@ -1,12 +1,30 @@
 All instructions contains 14 bits
 
-JUMP INSTRUCTIONS: 
+JUMPA INSTRUCTION : 
 
     opcode = "11"
-    addr = "0000000" to "1111111"
+    addr = "00000000" to "01111111"
 
     FORMAT :    
-        opcode + "00000" + addr 
+        opcode + "0000" + addr 
+
+JUMPR INSTRUCTIONS :
+
+    opcode = "10"
+    
+    flag (Flip-flop that contains the value of the flag for jump or not jump)
+        where :
+            flag_z = "00" (zero)
+            flag_nz = "01" (not zero)
+            flag_n =  "10" (negative)
+            flag_nn = "11" (not negative)
+    
+    rel (Value to jump from current instruction) - 10 bits
+
+    FORMAT : 
+        opcode + flag + "000" + rel
+
+
 
 R INSTRUCTIONS: 
 
@@ -26,7 +44,7 @@ R INSTRUCTIONS:
     **WARNING : Reg "000" is READ-ONLY so can't be assigned any value!!
 
     FORMAT :
-        opcode + Reg1 + Reg2 + Reg3 + function
+        opcode + Reg1 + Reg2 + "0" + Reg3 + function
 
     Description : 
         SUM : Receives two Registers(Reg1 and Reg2) as operands and put result of sum in Reg3.
@@ -37,7 +55,7 @@ R INSTRUCTIONS:
 I INSTRUCTIONS:
 
     opcode = "01" 
-    constant = "00000" to "11111" (5-bit)
+    constant = "0000" to "1111" (4-bit)
     function = "00" to "11"
         where : 
             "00" => SUM 
@@ -51,7 +69,7 @@ I INSTRUCTIONS:
     **WARNING : Reg "000" is READ-ONLY so can't be assigned any value!!
     
     FORMAT : 
-        opcode + Reg1 + constant + Reg3
+        opcode + Reg1 + constant + Reg3 + function
 
     Description : 
         SUM : Receives one Register(Reg1) and a constant as operands and put result of sum in Reg3.

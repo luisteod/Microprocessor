@@ -5,6 +5,9 @@ read tipo
 ghdl -a registrador.vhd
 ghdl -e registrador
 
+ghdl -a flipFlop.vhd
+ghdl -e flipFlop
+
 ghdl -a banco_reg.vhd
 ghdl -e banco_reg
 
