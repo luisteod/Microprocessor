@@ -199,28 +199,28 @@ BEGIN
 
     flipFlop_zero_comp : flipFlop PORT MAP(
         WR_EN => wr_en_zero_s,
-        D => ula_out_debug_s(0),
+        D => wr_en_zero_s,
         CLK => clk,
         Q => flag_jump_zero_s
     );
 
     flipFlop_not_zero_comp : flipFlop PORT MAP(
         WR_EN => wr_en_not_zero_s,
-        D => ula_out_debug_s(0),
+        D => wr_en_not_zero_s,
         CLK => clk,
         Q => flag_jump_not_zero_s
     );
 
     flipFlop_neg_comp : flipFlop PORT MAP(
         WR_EN => wr_en_neg_s,
-        D => ula_out_debug_s(0),
+        D => wr_en_neg_s,
         CLK => clk,
         Q => flag_jump_neg_s
     );
 
     flipFlop_not_neg_comp : flipFlop PORT MAP(
         WR_EN => wr_en_not_neg_s,
-        D => ula_out_debug_s(0),
+        D => wr_en_not_neg_s,
         CLK => clk,
         Q => flag_jump_not_neg_s
     );

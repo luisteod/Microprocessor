@@ -3,10 +3,10 @@ All instructions contains 14 bits
 JUMPA INSTRUCTION : 
 
     opcode = "11"
-    addr = "00000000" to "01111111"
+    addr = "00000000" to "1111111"
 
     FORMAT :    
-        opcode + "0000" + addr 
+        opcode + "00000" + addr 
 
 JUMPR INSTRUCTIONS :
 
@@ -19,10 +19,10 @@ JUMPR INSTRUCTIONS :
             flag_n =  "10" (negative)
             flag_nn = "11" (not negative)
     
-    rel (Value to jump from current instruction) - 10 bits
+    rel (Value to jump from current instruction) - 8 bits of a two's complement number
 
     FORMAT : 
-        opcode + flag + "000" + rel
+        opcode + flag + "00" + rel
 
 
 

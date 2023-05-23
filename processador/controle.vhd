@@ -56,7 +56,7 @@ BEGIN
     opcode <= instr(13 DOWNTO 12); --Catch the opcode from instruction
 
     --JUMP DECODE
-    jump_addr <= signed(instr(7 DOWNTO 0)) WHEN opcode = "11" ELSE
+    jump_addr <= signed("0" & instr(6 DOWNTO 0)) WHEN opcode = "11" ELSE
         signed(instr(7 DOWNTO 0)) + pc_rom; --jumpa or jumpr
 
     jump_en <= '1' WHEN opcode = "11" OR (opcode = "10" AND (flag_jump_zero = '1' OR flag_jump_not_zero = '1' OR flag_jump_neg = '1' OR flag_jump_not_neg = '1')) ELSE --Jumps is enable when opcode is "11"
