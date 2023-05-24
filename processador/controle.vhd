@@ -12,7 +12,7 @@ ENTITY controle IS
         flag_jump_neg : IN STD_LOGIC;
         flag_jump_not_neg : IN STD_LOGIC;
         ula_out : IN signed(15 DOWNTO 0);
-        is_update_jumpr_flag : OUT STD_LOGIC;
+        wr_en_update_jumpr_flag : OUT STD_LOGIC;
         wr_en_pc : OUT STD_LOGIC;
         wr_en_instr_reg : OUT STD_LOGIC;
         wr_en_ula_banco : OUT STD_LOGIC;
@@ -87,16 +87,16 @@ BEGIN
         '0';
 
     --setting condition flags for relative jump:  
-    is_zero <= '1' WHEN estado = execute_state AND (opcode = "00" OR opcode = "01") AND ula_out = "0000000000000000" ELSE
+    is_zero <= '1' WHEN  ula_out = "0000000000000000" ELSE
         '0';
     is_not_zero <= NOT is_zero_s;
 
-    is_neg <= '1' WHEN estado = execute_state AND (opcode = "00" OR opcode = "01") AND ula_out(15) = '1' ELSE
+    is_neg <= '1' WHEN ula_out(15) = '1' ELSE
         '0';
     is_not_neg <= NOT is_neg_s;
 
     --flag that verifies if it's ula instruction for update the conditional flags used in jumpr instr.
-    is_update_jumpr_flag <= '1' WHEN estado(1) = '1' AND (instr(13 DOWNTO 12) = "00" OR instr(13 DOWNTO 12) = "01")
+    wr_en_update_jumpr_flag <= '1' WHEN estado(1) = '1' AND (instr(13 DOWNTO 12) = "00" OR instr(13 DOWNTO 12) = "01")
         ELSE
         '0';
 

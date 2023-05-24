@@ -1,40 +1,40 @@
 v 4
-file . "flipFlop.vhd" "7925d2ac996a45d90b053f8dd4aece498f26b928" "20230524041807.083":
-  entity flipflop at 2( 15) + 0 on 1333;
-  architecture behavioral of flipflop at 14( 258) + 0 on 1334;
-file . "instr_reg.vhd" "d669ba883e8d19da16222263792cdfc6ceceef0b" "20230524041807.516":
-  entity instr_reg at 1( 0) + 0 on 1349;
-  architecture rtl of instr_reg at 15( 295) + 0 on 1350;
-file . "ula.vhd" "7d013915850b2479eae1cd379bacc74784ece94d" "20230524041807.391":
-  entity ula at 1( 0) + 0 on 1345;
-  architecture rtl of ula at 14( 272) + 0 on 1346;
-file . "mux2to1.vhd" "75734a5b217a28cd9f6c33f393e301bbb8091288" "20230524041807.164":
-  entity mux2to1 at 1( 0) + 0 on 1337;
-  architecture rtl of mux2to1 at 14( 268) + 0 on 1338;
-file . "processador_tb.vhd" "6a2fd0fdb886750d6a9725fb0390f966097ea52d" "20230524041807.718":
-  entity processador_tb at 1( 0) + 0 on 1355;
-  architecture rtl of processador_tb at 8( 108) + 0 on 1356;
-file . "processador.vhd" "dd77d33c3a4b322342fa96005e1453ad96fd9ac3" "20230524041807.632":
-  entity processador at 1( 0) + 0 on 1353;
-  architecture rtl of processador at 16( 348) + 0 on 1354;
-file . "pc.vhd" "4b972376902d046d397a09f8c08f79162ec80273" "20230524041807.279":
-  entity pc at 1( 0) + 0 on 1341;
-  architecture arch of pc at 15( 289) + 0 on 1342;
-file . "registrador.vhd" "fb19fafa0269a43e3d5e6262ed553d18b212a05e" "20230524041807.031":
-  entity registrador at 1( 0) + 0 on 1331;
-  architecture rtl of registrador at 15( 293) + 0 on 1332;
-file . "maq_estados.vhd" "d8603d0b44956e713e749435461c200a664160c3" "20230524041807.225":
-  entity maq_estados at 1( 0) + 0 on 1339;
-  architecture a_maq_estados of maq_estados at 11( 197) + 0 on 1340;
-file . "rom.vhd" "80defc1df7c11c77817d5b0a0a745077607cd548" "20230524041807.335":
-  entity rom at 1( 0) + 0 on 1343;
-  architecture arch of rom at 13( 211) + 0 on 1344;
-file . "banco_reg.vhd" "a996e35755f71b8a57abe064650490420481b95c" "20230524041807.105":
-  entity banco_reg at 1( 0) + 0 on 1335;
-  architecture rtl of banco_reg at 19( 471) + 0 on 1336;
-file . "ula_banco.vhd" "d3abdb49208fa61bf122abfbd81a810dd891b851" "20230524041807.450":
-  entity ula_banco at 1( 0) + 0 on 1347;
-  architecture rtl of ula_banco at 21( 528) + 0 on 1348;
-file . "controle.vhd" "ae457dcb2f36564d5246c69c0e86228c642fbc06" "20230524041807.573":
-  entity controle at 1( 0) + 0 on 1351;
-  architecture arch of controle at 32( 1092) + 0 on 1352;
+file . "flipFlop.vhd" "7925d2ac996a45d90b053f8dd4aece498f26b928" "20230526003009.645":
+  entity flipflop at 2( 15) + 0 on 1487;
+  architecture behavioral of flipflop at 14( 258) + 0 on 1488;
+file . "instr_reg.vhd" "d669ba883e8d19da16222263792cdfc6ceceef0b" "20230526003010.070":
+  entity instr_reg at 1( 0) + 0 on 1503;
+  architecture rtl of instr_reg at 15( 295) + 0 on 1504;
+file . "ula.vhd" "7d013915850b2479eae1cd379bacc74784ece94d" "20230526003009.938":
+  entity ula at 1( 0) + 0 on 1499;
+  architecture rtl of ula at 14( 272) + 0 on 1500;
+file . "mux2to1.vhd" "75734a5b217a28cd9f6c33f393e301bbb8091288" "20230526003009.728":
+  entity mux2to1 at 1( 0) + 0 on 1491;
+  architecture rtl of mux2to1 at 14( 268) + 0 on 1492;
+file . "processador_tb.vhd" "6a2fd0fdb886750d6a9725fb0390f966097ea52d" "20230526002434.882":
+  entity processador_tb at 1( 0) + 0 on 1483;
+  architecture rtl of processador_tb at 8( 108) + 0 on 1484;
+file . "processador.vhd" "5a3c7735186114601c3fe2422a4983515200e526" "20230526003010.180":
+  entity processador at 1( 0) + 0 on 1507;
+  architecture rtl of processador at 16( 348) + 0 on 1508;
+file . "pc.vhd" "4b972376902d046d397a09f8c08f79162ec80273" "20230526003009.833":
+  entity pc at 1( 0) + 0 on 1495;
+  architecture arch of pc at 15( 289) + 0 on 1496;
+file . "registrador.vhd" "fb19fafa0269a43e3d5e6262ed553d18b212a05e" "20230526003009.593":
+  entity registrador at 1( 0) + 0 on 1485;
+  architecture rtl of registrador at 15( 293) + 0 on 1486;
+file . "maq_estados.vhd" "d8603d0b44956e713e749435461c200a664160c3" "20230526003009.780":
+  entity maq_estados at 1( 0) + 0 on 1493;
+  architecture a_maq_estados of maq_estados at 11( 197) + 0 on 1494;
+file . "rom.vhd" "48873c65da9e72232048640b7254edf5e4a5c358" "20230526003009.885":
+  entity rom at 1( 0) + 0 on 1497;
+  architecture arch of rom at 13( 211) + 0 on 1498;
+file . "banco_reg.vhd" "a996e35755f71b8a57abe064650490420481b95c" "20230526003009.668":
+  entity banco_reg at 1( 0) + 0 on 1489;
+  architecture rtl of banco_reg at 19( 471) + 0 on 1490;
+file . "ula_banco.vhd" "d3abdb49208fa61bf122abfbd81a810dd891b851" "20230526003009.992":
+  entity ula_banco at 1( 0) + 0 on 1501;
+  architecture rtl of ula_banco at 21( 528) + 0 on 1502;
+file . "controle.vhd" "e96f889717809876de64208e7e6cebd18f1bb726" "20230526003010.123":
+  entity controle at 1( 0) + 0 on 1505;
+  architecture arch of controle at 32( 1095) + 0 on 1506;

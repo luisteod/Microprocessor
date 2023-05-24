@@ -13,13 +13,13 @@ END rom;
 ARCHITECTURE arch OF rom IS
   TYPE mem IS ARRAY (0 TO 127) OF unsigned(13 DOWNTO 0);
   CONSTANT conteudo_rom : mem := (
-    0 => "00" & "011" & "000" & "0000" & "11", --Carrega R3 (o registrador 3) com o valor 0
-    1 => "00" & "100" & "000" & "0000" & "11", --Carrega R4 com 0
-    2 => "00" & "100" & "011"& "0000" & "00", --Soma R3 com R4 e guarda em R4  
-    3 => "01" & "011" & "0000001" & "00", --Soma 1 em R3
-    4 => "01" & "011" & "0011110" & "01" , --Compara R3 com 30
-    5 => "10" & "10" & "00" & "11111101", --Se R3<30 salta para a instrução do passo 3 *
-    6 => "00" & "101" & "100" & "0000" & "11", --Copia valor de R4 para R5
+    0 => "00" & "011" & "000" & "0000" & "11", --Carrega R3 (o registrador 3) com o valor 0     0. MOV $R3,$R0
+    1 => "00" & "100" & "000" & "0000" & "11", --Carrega R4 com 0                               1. MOV $R4,$R0
+    2 => "00" & "100" & "011"& "0000" & "00", --Soma R3 com R4 e guarda em R4                   2. ADD $R4,$R3
+    3 => "01" & "011" & "0000001" & "00", --Soma 1 em R3                                        3. ADDI $R3,1   
+    4 => "01" & "011" & "0011110" & "01" , --Compara R3 com 30                                  4. CMP $R3,30
+    5 => "10" & "10" & "00" & "11111101", --Se R3<30 salta para a instrução do passo 3 *        5. JMPR flag_neg,-3
+    6 => "00" & "101" & "100" & "0000" & "11", --Copia valor de R4 para R5                      6. MOV $R5,$R4
     7 => "00000000000000",
     8 => "00000000000000",
     9 => "00000000000000",
@@ -38,11 +38,13 @@ ARCHITECTURE arch OF rom IS
     OTHERS => (OTHERS => '0')
   );
 BEGIN
-  PROCESS (clock)
-  BEGIN
-    IF (rising_edge(clock)) THEN
-      dado <= conteudo_rom(to_integer(endereco));
-    END IF;
-  END PROCESS;
+  -- PROCESS (clock)
+  -- BEGIN
+  --   IF (rising_edge(clock)) THEN
+  --     dado <= conteudo_rom(to_integer(endereco));
+  --   END IF;
+  -- END PROCESS;
+
+  dado <= conteudo_rom(to_integer(endereco));
 
 END ARCHITECTURE;
