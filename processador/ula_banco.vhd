@@ -7,9 +7,9 @@ ENTITY ula_banco IS
         CLK : IN STD_LOGIC;
         RST : IN STD_LOGIC;
         WR_EN : IN STD_LOGIC;
-        CONST : IN unsigned(15 DOWNTO 0); --Immediate constant
+        CONST : IN signed(15 DOWNTO 0); --Immediate constant
 
-        DEBUG : OUT unsigned(15 DOWNTO 0); --Out of ULA
+        DEBUG : OUT signed(15 DOWNTO 0); --Out of ULA
         ULA_OP : IN unsigned(1 DOWNTO 0);
         REG_IN_A : IN unsigned(2 DOWNTO 0);
         REG_IN_B : IN unsigned(2 DOWNTO 0);
@@ -22,10 +22,10 @@ ARCHITECTURE rtl OF ula_banco IS
 
     COMPONENT ula
         PORT (
-            IN_A : IN unsigned(15 DOWNTO 0);
-            IN_B : IN unsigned(15 DOWNTO 0);
+            IN_A : IN signed(15 DOWNTO 0);
+            IN_B : IN signed(15 DOWNTO 0);
             SEL : IN unsigned(1 DOWNTO 0);
-            OUT_C : OUT unsigned(15 DOWNTO 0)
+            OUT_C : OUT signed(15 DOWNTO 0)
         );
     END COMPONENT;
 
@@ -37,40 +37,40 @@ ARCHITECTURE rtl OF ula_banco IS
             WR_EN : IN STD_LOGIC;
             CLK : IN STD_LOGIC;
             RST : IN STD_LOGIC;
-            DATA_IN : IN unsigned (15 DOWNTO 0);
-            OUT_REG_A : OUT unsigned(15 DOWNTO 0);
-            OUT_REG_B : OUT unsigned(15 DOWNTO 0)
+            DATA_IN : IN signed (15 DOWNTO 0);
+            OUT_REG_A : OUT signed(15 DOWNTO 0);
+            OUT_REG_B : OUT signed(15 DOWNTO 0)
         );
     END COMPONENT;
 
     COMPONENT mux2to1
         PORT (
-            IN_A : IN unsigned(15 DOWNTO 0);
-            IN_B : IN unsigned(15 DOWNTO 0);
+            IN_A : IN signed(15 DOWNTO 0);
+            IN_B : IN signed(15 DOWNTO 0);
             SEL : IN STD_LOGIC;
-            OUT_C : OUT unsigned(15 DOWNTO 0)
+            OUT_C : OUT signed(15 DOWNTO 0)
         );
     END COMPONENT;
 
-    SIGNAL ULA_IN_A : unsigned(15 DOWNTO 0);
-    SIGNAL ULA_IN_B : unsigned(15 DOWNTO 0);
-    SIGNAL ULA_OUT : unsigned(15 DOWNTO 0);
+    SIGNAL ULA_IN_A : signed(15 DOWNTO 0);
+    SIGNAL ULA_IN_B : signed(15 DOWNTO 0);
+    SIGNAL ULA_OUT : signed(15 DOWNTO 0);
     SIGNAL ULA_SEL : unsigned(1 DOWNTO 0);
 
     SIGNAL BANCO_IN_REG_A : unsigned(2 DOWNTO 0);
     SIGNAL BANCO_IN_REG_B : unsigned(2 DOWNTO 0);
     SIGNAL BANCO_IN_REG_C : unsigned(2 DOWNTO 0);
-    SIGNAL BANCO_DATA_IN : unsigned(15 DOWNTO 0);
-    SIGNAL BANCO_OUT_REG_A : unsigned(15 DOWNTO 0);
-    SIGNAL BANCO_OUT_REG_B : unsigned(15 DOWNTO 0);
+    SIGNAL BANCO_DATA_IN : signed(15 DOWNTO 0);
+    SIGNAL BANCO_OUT_REG_A : signed(15 DOWNTO 0);
+    SIGNAL BANCO_OUT_REG_B : signed(15 DOWNTO 0);
     SIGNAL BANCO_WR_EN : STD_LOGIC;
     SIGNAL BANCO_CLK : STD_LOGIC;
     SIGNAL BANCO_RST : STD_LOGIC;
 
-    SIGNAL MUX_IN_A : unsigned(15 DOWNTO 0);
-    SIGNAL MUX_IN_B : unsigned(15 DOWNTO 0);
+    SIGNAL MUX_IN_A : signed(15 DOWNTO 0);
+    SIGNAL MUX_IN_B : signed(15 DOWNTO 0);
     SIGNAL MUX_SEL_S : STD_LOGIC;
-    SIGNAL MUX_OUT_C : unsigned(15 DOWNTO 0);
+    SIGNAL MUX_OUT_C : signed(15 DOWNTO 0);
 
 BEGIN
 

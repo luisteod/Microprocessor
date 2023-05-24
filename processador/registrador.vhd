@@ -7,13 +7,13 @@ entity registrador is
         rst : in std_logic;
         clk : in std_logic;
         wr_en : in std_logic;
-        data_in : in unsigned(15 downto 0);
-        data_out : out unsigned(15 downto 0)
+        data_in : in signed(15 downto 0);
+        data_out : out signed(15 downto 0)
     );
 end entity;
 
 architecture rtl of registrador is
-signal registro : unsigned(15 downto 0) ;
+signal registro : signed(15 downto 0) ;
 begin
 data_out <= registro;
     process(clk,rst)

@@ -4,10 +4,10 @@ use IEEE.numeric_std.all;
 
 entity mux2to1 is
     port(
-        IN_A  : in unsigned(15 downto 0);
-        IN_B  : in unsigned(15 downto 0);
+        IN_A  : in signed(15 downto 0);
+        IN_B  : in signed(15 downto 0);
         SEL   : in std_logic;
-        OUT_C : out unsigned(15 downto 0)
+        OUT_C : out signed(15 downto 0)
     );
 end entity;
 

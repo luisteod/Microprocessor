@@ -13,13 +13,13 @@ END rom;
 ARCHITECTURE arch OF rom IS
   TYPE mem IS ARRAY (0 TO 127) OF unsigned(13 DOWNTO 0);
   CONSTANT conteudo_rom : mem := (
-    0 => "01" & "000" & "0000" & "011" & "00", --Carrega R3 (o registrador 3) com o valor 0
-    1 => "01" & "000" & "0000" & "100" & "00", --Carrega R4 com 8
-    2 => "00" & "011" & "100"& "0" & "100" & "00", --Soma R3 com R4 e guarda em R4  
-    3 => "01" & "011" & "0001" & "011" & "00", --Subtrai 1 de R5 --Soma 1 em R3
-    4 =>    , --Se R3<30 salta para a instrução do passo 3 *
-    5 => "00000000000000",
-    6 => "00000000000000",
+    0 => "00" & "011" & "000" & "0000" & "11", --Carrega R3 (o registrador 3) com o valor 0
+    1 => "00" & "100" & "000" & "0000" & "11", --Carrega R4 com 0
+    2 => "00" & "100" & "011"& "0000" & "00", --Soma R3 com R4 e guarda em R4  
+    3 => "01" & "011" & "0000001" & "00", --Soma 1 em R3
+    4 => "01" & "011" & "0011110" & "01" , --Compara R3 com 30
+    5 => "10" & "10" & "00" & "11111101", --Se R3<30 salta para a instrução do passo 3 *
+    6 => "00" & "101" & "100" & "0000" & "11", --Copia valor de R4 para R5
     7 => "00000000000000",
     8 => "00000000000000",
     9 => "00000000000000",

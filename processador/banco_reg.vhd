@@ -10,9 +10,9 @@ ENTITY banco_reg IS
         WR_EN : IN STD_LOGIC;
         CLK : IN STD_LOGIC;
         RST : IN STD_LOGIC;
-        DATA_IN : IN unsigned (15 DOWNTO 0);
-        OUT_REG_A : OUT unsigned(15 DOWNTO 0);
-        OUT_REG_B : OUT unsigned(15 DOWNTO 0)
+        DATA_IN : IN signed (15 DOWNTO 0);
+        OUT_REG_A : OUT signed(15 DOWNTO 0);
+        OUT_REG_B : OUT signed(15 DOWNTO 0)
     );
 END ENTITY;
 
@@ -23,15 +23,15 @@ ARCHITECTURE rtl OF banco_reg IS
             rst : IN STD_LOGIC;
             clk : IN STD_LOGIC;
             wr_en : IN STD_LOGIC;
-            data_in : IN unsigned(15 DOWNTO 0);
-            data_out : OUT unsigned(15 DOWNTO 0)
+            data_in : IN signed(15 DOWNTO 0);
+            data_out : OUT signed(15 DOWNTO 0)
         );
     END COMPONENT;
 
     SIGNAL data_out_0, data_out_1,
     data_out_2, data_out_3,
     data_out_4, data_out_5,
-    data_out_6, data_out_7 : unsigned(15 DOWNTO 0);
+    data_out_6, data_out_7 : signed(15 DOWNTO 0);
     SIGNAL wr_0, wr_1,
     wr_2, wr_3,
     wr_4, wr_5,
