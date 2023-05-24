@@ -9,7 +9,7 @@ ENTITY processador IS
         Estado : OUT unsigned(1 DOWNTO 0);
         PC_out : OUT signed(7 DOWNTO 0);
         Instr : OUT unsigned(13 DOWNTO 0);
-        ULA_out : OUT unsigned(15 DOWNTO 0)
+        ULA_out : OUT signed(15 DOWNTO 0)
     );
 END ENTITY;
 
@@ -55,8 +55,8 @@ ARCHITECTURE rtl OF processador IS
             CLK : IN STD_LOGIC;
             RST : IN STD_LOGIC;
             WR_EN : IN STD_LOGIC;
-            CONST : IN unsigned(15 DOWNTO 0); --Immediate constant
-            DEBUG : OUT unsigned(15 DOWNTO 0); --Out of ULA
+            CONST : IN signed(15 DOWNTO 0); --Immediate constant
+            DEBUG : OUT signed(15 DOWNTO 0); --Out of ULA
             ULA_OP : IN unsigned(1 DOWNTO 0);
             REG_IN_A : IN unsigned(2 DOWNTO 0);
             REG_IN_B : IN unsigned(2 DOWNTO 0);
@@ -74,20 +74,21 @@ ARCHITECTURE rtl OF processador IS
             flag_jump_not_zero : IN STD_LOGIC;
             flag_jump_neg : IN STD_LOGIC;
             flag_jump_not_neg : IN STD_LOGIC;
-            ula_out : in unsigned(15 downto 0);
+            ula_out : IN signed(15 DOWNTO 0);
+            is_update_jumpr_flag : OUT STD_LOGIC;
             wr_en_pc : OUT STD_LOGIC;
             wr_en_instr_reg : OUT STD_LOGIC;
             wr_en_ula_banco : OUT STD_LOGIC;
-            wr_en_zero : OUT STD_LOGIC;
-            wr_en_not_zero : OUT STD_LOGIC;
-            wr_en_neg : OUT STD_LOGIC;
-            wr_en_not_neg : OUT STD_LOGIC;
+            is_zero : OUT STD_LOGIC;
+            is_not_zero : OUT STD_LOGIC;
+            is_neg : OUT STD_LOGIC;
+            is_not_neg : OUT STD_LOGIC;
             ula_op : OUT unsigned(1 DOWNTO 0);
             sel_reg_or_const : OUT STD_LOGIC;
             addr_reg1 : OUT unsigned(2 DOWNTO 0);
             addr_reg2 : OUT unsigned(2 DOWNTO 0);
             addr_reg3 : OUT unsigned(2 DOWNTO 0);
-            const : OUT unsigned(15 DOWNTO 0);
+            const : OUT signed(15 DOWNTO 0);
             pc_in : OUT signed(7 DOWNTO 0)
         );
     END COMPONENT;
@@ -112,20 +113,22 @@ ARCHITECTURE rtl OF processador IS
     SIGNAL Reg1_s : unsigned(2 DOWNTO 0);
     SIGNAL Reg2_s : unsigned(2 DOWNTO 0);
     SIGNAL Reg3_s : unsigned(2 DOWNTO 0);
-    SIGNAL const_s : unsigned(15 DOWNTO 0);
+    SIGNAL const_s : signed(15 DOWNTO 0);
     SIGNAL ula_op_s : unsigned(1 DOWNTO 0);
     SIGNAL sel_reg_or_const_s : STD_LOGIC;
-    SIGNAL ula_out_debug_s : unsigned(15 DOWNTO 0);
+    SIGNAL ula_out_debug_s : signed(15 DOWNTO 0);
 
     SIGNAL flag_jump_zero_s : STD_LOGIC;
     SIGNAL flag_jump_not_zero_s : STD_LOGIC;
     SIGNAL flag_jump_neg_s : STD_LOGIC;
     SIGNAL flag_jump_not_neg_s : STD_LOGIC;
 
-    SIGNAL wr_en_zero_s : STD_LOGIC;
-    SIGNAL wr_en_not_zero_s : STD_LOGIC;
-    SIGNAL wr_en_neg_s : STD_LOGIC;
-    SIGNAL wr_en_not_neg_s : STD_LOGIC;
+    SIGNAL is_zero_s : STD_LOGIC;
+    SIGNAL is_not_zero_s : STD_LOGIC;
+    SIGNAL is_neg_s : STD_LOGIC;
+    SIGNAL is_not_neg_s : STD_LOGIC;
+
+    SIGNAL is_update_jumpr_flag_s : STD_LOGIC;
 
 BEGIN
     pc_comp : pc PORT MAP(
@@ -172,7 +175,7 @@ BEGIN
     );
 
     controle_comp : controle PORT MAP(
-        
+
         estado => estado_s,
         instr => instr_s,
         pc_rom => pc_rom_s,
@@ -181,13 +184,14 @@ BEGIN
         flag_jump_neg => flag_jump_neg_s,
         flag_jump_not_neg => flag_jump_not_neg_s,
         ula_out => ula_out_debug_s,
+        is_update_jumpr_flag => is_update_jumpr_flag_s,
         wr_en_pc => wr_en_pc_s,
         wr_en_instr_reg => wr_en_instr_reg_s,
         wr_en_ula_banco => wr_en_ula_banco_s,
-        wr_en_zero => wr_en_zero_s,
-        wr_en_not_zero => wr_en_not_zero_s,
-        wr_en_neg => wr_en_neg_s,
-        wr_en_not_neg => wr_en_not_neg_s,
+        is_zero => is_zero_s,
+        is_not_zero => is_not_zero_s,
+        is_neg => is_neg_s,
+        is_not_neg => is_not_neg_s,
         ula_op => ula_op_s,
         sel_reg_or_const => sel_reg_or_const_s,
         addr_reg1 => Reg1_s,
@@ -198,29 +202,29 @@ BEGIN
     );
 
     flipFlop_zero_comp : flipFlop PORT MAP(
-        WR_EN => wr_en_zero_s,
-        D => wr_en_zero_s,
+        WR_EN => is_update_jumpr_flag_s,
+        D => is_zero_s,
         CLK => clk,
         Q => flag_jump_zero_s
     );
 
     flipFlop_not_zero_comp : flipFlop PORT MAP(
-        WR_EN => wr_en_not_zero_s,
-        D => wr_en_not_zero_s,
+        WR_EN => is_update_jumpr_flag_s,
+        D => is_not_zero_s,
         CLK => clk,
         Q => flag_jump_not_zero_s
     );
 
     flipFlop_neg_comp : flipFlop PORT MAP(
-        WR_EN => wr_en_neg_s,
-        D => wr_en_neg_s,
+        WR_EN => is_update_jumpr_flag_s,
+        D => is_neg_s,
         CLK => clk,
         Q => flag_jump_neg_s
     );
 
     flipFlop_not_neg_comp : flipFlop PORT MAP(
-        WR_EN => wr_en_not_neg_s,
-        D => wr_en_not_neg_s,
+        WR_EN => is_update_jumpr_flag_s,
+        D => is_not_neg_s,
         CLK => clk,
         Q => flag_jump_not_neg_s
     );

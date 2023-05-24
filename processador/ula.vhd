@@ -1,47 +1,44 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+USE IEEE.numeric_std.ALL;
 
-entity ula is
-    port(
-        IN_A    : in unsigned(15 downto 0);
-        IN_B    : in unsigned(15 downto 0);
-        SEL     : in unsigned(1 downto 0);
-        OUT_C   : out unsigned(15 downto 0)
+ENTITY ula IS
+    PORT (
+        IN_A : IN signed(15 DOWNTO 0);
+        IN_B : IN signed(15 DOWNTO 0);
+        SEL : IN unsigned(1 DOWNTO 0);
+        OUT_C : OUT signed(15 DOWNTO 0)
     );
-end entity;
+END ENTITY;
 
-architecture rtl of ula is
+ARCHITECTURE rtl OF ula IS
 
-    signal S_IN_A   : unsigned(15 downto 0) := "0000000000000000"; 
-    signal S_IN_B   : unsigned(15 downto 0) := "0000000000000000"; 
-    signal S_OUT_C  : unsigned(15 downto 0) := "0000000000000000";
-    signal S_SEL    : unsigned(1 downto 0)  := "00"; 
+    SIGNAL S_IN_A : signed(15 DOWNTO 0) := "0000000000000000";
+    SIGNAL S_IN_B : signed(15 DOWNTO 0) := "0000000000000000";
+    SIGNAL S_OUT_C : signed(15 DOWNTO 0) := "0000000000000000";
+    SIGNAL S_SEL : unsigned(1 DOWNTO 0) := "00";
 
-    signal RES_MAIOR  : unsigned(15 downto 0) := "0000000000000000"; 
-    signal RES_EQUAL  : unsigned(15 downto 0) := "0000000000000000"; 
-    signal RES_SUB    : unsigned(15 downto 0) := "0000000000000000";
-    signal RES_SOMA   : unsigned(15 downto 0) := "0000000000000000";
+    SIGNAL RES_CMP : signed(15 DOWNTO 0) := "0000000000000000";
+    SIGNAL RES_MOV : signed(15 DOWNTO 0) := "0000000000000000";
+    SIGNAL RES_SUB : signed(15 DOWNTO 0) := "0000000000000000";
+    SIGNAL RES_ADD : signed(15 DOWNTO 0) := "0000000000000000";
 
-begin
+BEGIN
 
-    S_IN_A  <= IN_A;
-    S_IN_B  <= IN_B;
-    OUT_C   <= S_OUT_C;
-    S_SEL   <= SEL;
+    S_IN_A <= IN_A;
+    S_IN_B <= IN_B;
+    OUT_C <= S_OUT_C;
+    S_SEL <= SEL;
 
-    RES_SOMA  <= S_IN_A + S_IN_B ;
-    RES_SUB   <= S_IN_A - S_IN_B ;
-    RES_MAIOR <= "0000000000000001" when S_IN_A > S_IN_B else
-                 "0000000000000000";
-    RES_EQUAL <= "0000000000000001" when S_IN_A = S_IN_B else
-                 "0000000000000000";
-    
+    RES_ADD <= S_IN_A + S_IN_B;
+    RES_SUB <= S_IN_A - S_IN_B;
+    RES_CMP <= S_IN_A - S_IN_B;
+    RES_MOV <= S_IN_B;
 
-    S_OUT_C <= RES_SOMA  when S_SEL = "00" else  --SOMA
-               RES_MAIOR when S_SEL = "01" else  --MAIOR
-               RES_SUB when S_SEL = "10" else  --SUB
-               RES_EQUAL when S_SEL = "11" else  --IGUAL
-               "0000000000000000";
+    S_OUT_C <= RES_ADD WHEN S_SEL = "00" ELSE --ADD
+        RES_CMP WHEN S_SEL = "01" ELSE --CMP
+        RES_SUB WHEN S_SEL = "10" ELSE --SUB
+        RES_MOV WHEN S_SEL = "11" ELSE --MOV
+        "0000000000000000";
 
-end architecture rtl;
+END ARCHITECTURE rtl;

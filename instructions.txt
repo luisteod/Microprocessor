@@ -3,10 +3,10 @@ All instructions contains 14 bits
 JUMPA INSTRUCTION : 
 
     opcode = "11"
-    addr = "00000000" to "1111111"
+    addr = "00000000" to "01111111" (8 bits)
 
     FORMAT :    
-        opcode + "00000" + addr 
+        opcode + "0000" + addr 
 
 JUMPR INSTRUCTIONS :
 
@@ -32,47 +32,45 @@ R INSTRUCTIONS:
 
     function = "00" to "11"
         where :
-            "00" => SUM 
-            "01" => GREATER comparison
+            "00" => ADD 
+            "01" => CMP
             "10" => SUB
-            "11" => EQUAL comparison 
+            "11" => MOV
 
     Reg1 = "000" to "111"
-    Reg2 = "000" to "111"
-    Reg3 = "001" to "111"  
+    Reg2 = "001" to "111"  
 
     **WARNING : Reg "000" is READ-ONLY so can't be assigned any value!!
 
     FORMAT :
-        opcode + Reg1 + Reg2 + "0" + Reg3 + function
+        opcode + Reg1 + Reg2 + "0000" + function
 
     Description : 
-        SUM : Receives two Registers(Reg1 and Reg2) as operands and put result of sum in Reg3.
-        GREATER : Receives two Registers(Reg1 and Reg2) as operands and put result of greater than comparison in Reg3.
+        ADD : Reg1 <-- Reg1 + Reg2
+        CMP : Receives two Registers(Reg1 and Reg2) as operands and put result of greater than comparison in Reg3.
         SUB : Receives two Registers(Reg1 and Reg2) as operands and put the result of subtraction in Reg3.
-        EQUAL : Receives two Registers(Reg1 and Reg2) as operands and put the result of equal comparison in Reg3.
+        MOV : Reg1 <-- Reg2
 
 I INSTRUCTIONS:
 
     opcode = "01" 
-    constant = "0000" to "1111" (4-bit)
+    constant = "0000000" to "1111111" (7-bit)
     function = "00" to "11"
         where : 
-            "00" => SUM 
-            "01" => GREATER comparison
+            "00" => ADD 
+            "01" => CMP
             "10" => SUB
-            "11" => EQUAL comparison 
+            "11" => MOV
     
     Reg1 = "000" to "111"
-    Reg3 = "001" to "111"  
     
     **WARNING : Reg "000" is READ-ONLY so can't be assigned any value!!
     
     FORMAT : 
-        opcode + Reg1 + constant + Reg3 + function
+        opcode + Reg1 + constant + function
 
     Description : 
-        SUM : Receives one Register(Reg1) and a constant as operands and put result of sum in Reg3.
-        GREATER : Receives one Register(Reg1) and a constant as operands and put result of greater than comparison in Reg3.
+        ADD : Receives one Register(Reg1) and a constant as operands and put result of sum in Reg3.
+        CMP : Receives one Register(Reg1) and a constant as operands and put result of greater than comparison in Reg3.
         SUB : Receives one Register(Reg1) and a constant as operands and put the result of subtraction in Reg3.
-        EQUAL : Receives one Register(Reg1) and a constant as operands and put the result of equal comparison in Reg3.    
+        MOV : Receives one Register(Reg1) and a constant as operands and put the result of equal comparison in Reg3.    
