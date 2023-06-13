@@ -50,7 +50,7 @@ ARCHITECTURE rtl OF processador IS
         );
     END COMPONENT;
 
-    COMPONENT ula_banco
+    COMPONENT ula_banco_ram
         PORT (
             CLK : IN STD_LOGIC;
             RST : IN STD_LOGIC;
@@ -61,7 +61,9 @@ ARCHITECTURE rtl OF processador IS
             REG_IN_A : IN unsigned(2 DOWNTO 0);
             REG_IN_B : IN unsigned(2 DOWNTO 0);
             REG_IN_C : IN unsigned(2 DOWNTO 0);
-            MUX_SEL : IN STD_LOGIC
+            MUX_SEL : IN STD_LOGIC;
+            WR_EN_RAM : IN STD_LOGIC;
+            RD_EN_RAM : IN STD_LOGIC
         );
     END COMPONENT;
 
@@ -79,6 +81,8 @@ ARCHITECTURE rtl OF processador IS
             wr_en_pc : OUT STD_LOGIC;
             wr_en_instr_reg : OUT STD_LOGIC;
             wr_en_ula_banco : OUT STD_LOGIC;
+            wr_en_ram : OUT STD_LOGIC;
+            rd_en_ram : OUT STD_LOGIC;
             is_zero : OUT STD_LOGIC;
             is_not_zero : OUT STD_LOGIC;
             is_neg : OUT STD_LOGIC;
@@ -102,6 +106,8 @@ ARCHITECTURE rtl OF processador IS
         );
     END COMPONENT;
 
+    SIGNAL wr_en_ram_s : STD_LOGIC;
+    SIGNAL rd_en_ram_s : STD_LOGIC;
     SIGNAL wr_en_ula_banco_s : STD_LOGIC;
     SIGNAL wr_en_pc_s : STD_LOGIC;
     SIGNAL wr_en_instr_reg_s : STD_LOGIC;
@@ -160,7 +166,7 @@ BEGIN
         estado => estado_s
     );
 
-    ula_banco_comp : ula_banco PORT MAP(
+    ula_banco_ram_comp : ula_banco_ram PORT MAP(
 
         CLK => clk,
         RST => rst,
@@ -171,7 +177,9 @@ BEGIN
         REG_IN_A => Reg1_s,
         REG_IN_B => Reg2_s,
         REG_IN_C => Reg3_s,
-        MUX_SEL => sel_reg_or_const_s
+        MUX_SEL => sel_reg_or_const_s,
+        WR_EN_RAM => wr_en_ram_s,
+        RD_EN_RAM => rd_en_ram_s
     );
 
     controle_comp : controle PORT MAP(
@@ -188,6 +196,8 @@ BEGIN
         wr_en_pc => wr_en_pc_s,
         wr_en_instr_reg => wr_en_instr_reg_s,
         wr_en_ula_banco => wr_en_ula_banco_s,
+        wr_en_ram => wr_en_ram_s,
+        rd_en_ram => rd_en_ram_s,
         is_zero => is_zero_s,
         is_not_zero => is_not_zero_s,
         is_neg => is_neg_s,

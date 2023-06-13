@@ -26,8 +26,11 @@ ghdl -e rom
 ghdl -a ula.vhd
 ghdl -e ula
 
-ghdl -a ula_banco.vhd
-ghdl -e ula_banco
+ghdl -a ram.vhd
+ghdl -e ram
+
+ghdl -a ula_banco_ram.vhd
+ghdl -e ula_banco_ram
 
 ghdl -a instr_reg.vhd
 ghdl -e instr_reg

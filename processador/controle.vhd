@@ -16,6 +16,8 @@ ENTITY controle IS
         wr_en_pc : OUT STD_LOGIC;
         wr_en_instr_reg : OUT STD_LOGIC;
         wr_en_ula_banco : OUT STD_LOGIC;
+        wr_en_ram : OUT STD_LOGIC;
+        rd_en_ram : OUT STD_LOGIC;
         is_zero : OUT STD_LOGIC;
         is_not_zero : OUT STD_LOGIC;
         is_neg : OUT STD_LOGIC;
@@ -36,6 +38,11 @@ ARCHITECTURE arch OF controle IS
     SIGNAL jump_en : STD_LOGIC;
     SIGNAL flag_decode : unsigned(1 DOWNTO 0);
     SIGNAL func : unsigned(1 DOWNTO 0);
+
+    SIGNAL flag_ram : unsigned(1 downto 0);
+    CONSTANT flag_no_ram : unsigned(1 downto 0) :="00";
+    CONSTANT flag_to_ram : unsigned(1 downto 0) :="01";
+    CONSTANT flag_from_ram : unsigned(1 downto 0) := "10";
 
     SIGNAL is_zero_s : STD_LOGIC;
     SIGNAL is_neg_s : STD_LOGIC;
@@ -70,6 +77,7 @@ BEGIN
 
     --R AND I DECODE
     func <= instr(1 DOWNTO 0);
+    flag_ram <= instr(3 DOWNTO 2); --flag that indicates ir R operations is between registers or register RAM
     addr_reg2 <= instr(8 DOWNTO 6);
     addr_reg3 <= instr(11 DOWNTO 9); --Reg1 = Reg3(Registrador de gravação do resultado)
     addr_reg1 <= instr(11 DOWNTO 9);
@@ -83,11 +91,16 @@ BEGIN
     --EXECUTE---------------------------------------------------------------------------------------
 
     --R AND I EXECUTE
-    wr_en_ula_banco <= '1' WHEN estado = execute_state AND (opcode = "00" OR opcode = "01") AND func /= "01" ELSE --If func=CMP, didn't write in register bank
+    wr_en_ula_banco <= '1' WHEN estado = execute_state AND (opcode = "01" OR (opcode = "00" AND flag_ram /= flag_to_ram)) AND func /= "01" ELSE --If func=CMP, didn't write in register bank
+        '0';
+
+    wr_en_ram <= '1' WHEN estado = execute_state AND (opcode = "00" AND flag_ram = flag_to_ram) AND func /= "01" ELSE
+        '0';
+    rd_en_ram <= '1' WHEN estado = execute_state AND (opcode = "00" AND flag_ram = flag_from_ram) ELSE
         '0';
 
     --setting condition flags for relative jump:  
-    is_zero <= '1' WHEN  ula_out = "0000000000000000" ELSE
+    is_zero <= '1' WHEN ula_out = "0000000000000000" ELSE
         '0';
     is_not_zero <= NOT is_zero_s;
 

@@ -7,14 +7,14 @@ entity ram is
     clk : in std_logic;
     endereco : in unsigned(6 downto 0);
     wr_en : in std_logic;
-    dado_in : in unsigned(13 downto 0);
-    dado_out : out unsigned(13 downto 0)
+    dado_in : in signed(15 downto 0);
+    dado_out : out signed(15 downto 0)
   ) ;
 end entity; 
 
 architecture arch of ram is
     
-    type mem is array (0 to 127) of unsigned(13 downto 0);
+    type mem is array (0 to 127) of signed(15 downto 0);
     signal conteudo_ram : mem;
 
 begin 

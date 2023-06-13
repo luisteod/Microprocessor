@@ -30,6 +30,8 @@ R INSTRUCTIONS:
 
     opcode = "00"
 
+    flag_ram = '00' (Reg to Reg) or '01' (Reg to Ram) or '10' (Ram to Reg)
+
     function = "00" to "11"
         where :
             "00" => ADD 
@@ -43,13 +45,30 @@ R INSTRUCTIONS:
     **WARNING : Reg "000" is READ-ONLY so can't be assigned any value!!
 
     FORMAT :
-        opcode + Reg1 + Reg2 + "0000" + function
+        opcode + Reg1 + Reg2 + "00" + flag_ram + function
 
     Description : 
-        ADD : Reg1 <-- Reg1 + Reg2
-        CMP : Receives two Registers(Reg1 and Reg2) as operands and put result of greater than comparison in Reg3.
-        SUB : Receives two Registers(Reg1 and Reg2) as operands and put the result of subtraction in Reg3.
+
+    (flag_no_ram = '00')
+
+        ADD : Reg1 <-- Reg1 + Reg2 
+        CMP : 
+        SUB : Reg1 <-- Reg1 - Reg2
         MOV : Reg1 <-- Reg2
+        
+    (flag_to_ram = '01')
+
+        ADD :
+        CMP :
+        SUB :
+        MOV :
+    
+    (flag_from_ram = '01')
+
+        ADD :
+        CMP :
+        SUB :
+        MOV :
 
 I INSTRUCTIONS:
 
@@ -70,7 +89,7 @@ I INSTRUCTIONS:
         opcode + Reg1 + constant + function
 
     Description : 
-        ADD : Receives one Register(Reg1) and a constant as operands and put result of sum in Reg3.
-        CMP : Receives one Register(Reg1) and a constant as operands and put result of greater than comparison in Reg3.
-        SUB : Receives one Register(Reg1) and a constant as operands and put the result of subtraction in Reg3.
-        MOV : Receives one Register(Reg1) and a constant as operands and put the result of equal comparison in Reg3.    
+        ADD : Reg1 <-- Reg1 + constant
+        CMP : 
+        SUB : Reg1 <-- Reg1 - constant
+        MOV : Reg1 <-- constant
