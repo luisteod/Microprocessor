@@ -60,7 +60,7 @@ R INSTRUCTIONS:
        **Reg1 had to be load with RAM_ADD in a previous intruction 
         MOV : Reg1[RAM_ADD] <-- Reg2
     
-    (flag_from_ram = '01')
+    (flag_from_ram = '10')
        **Reg2 had to be load with RAM_ADD in a previous intruction 
         MOV : Reg1 <-- Reg2[RAM_ADD]
 
