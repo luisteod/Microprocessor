@@ -57,18 +57,12 @@ R INSTRUCTIONS:
         MOV : Reg1 <-- Reg2
         
     (flag_to_ram = '01')
-
-        ADD :
-        CMP :
-        SUB :
-        MOV :
+       **Reg1 had to be load with RAM_ADD in a previous intruction 
+        MOV : Reg1[RAM_ADD] <-- Reg2
     
     (flag_from_ram = '01')
-
-        ADD :
-        CMP :
-        SUB :
-        MOV :
+       **Reg2 had to be load with RAM_ADD in a previous intruction 
+        MOV : Reg1 <-- Reg2[RAM_ADD]
 
 I INSTRUCTIONS:
 
