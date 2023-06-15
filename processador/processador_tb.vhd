@@ -25,7 +25,7 @@ ARCHITECTURE rtl OF processador_tb IS
     signal Instr : unsigned(13 downto 0);
     signal ula_out_debug : signed(15 downto 0);
 
-    constant period_time : time := 10 ns;
+    constant period_time : time := 1 ns;
     signal finished : std_logic := '0';
 
     begin 
