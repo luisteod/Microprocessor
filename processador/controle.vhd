@@ -39,13 +39,15 @@ ARCHITECTURE arch OF controle IS
     SIGNAL flag_decode : unsigned(1 DOWNTO 0);
     SIGNAL func : unsigned(1 DOWNTO 0);
 
-    SIGNAL flag_ram : unsigned(1 downto 0);
-    CONSTANT flag_no_ram : unsigned(1 downto 0) :="00";
-    CONSTANT flag_to_ram : unsigned(1 downto 0) :="01";
-    CONSTANT flag_from_ram : unsigned(1 downto 0) := "10";
+    SIGNAL flag_ram : unsigned(1 DOWNTO 0);
+    CONSTANT flag_no_ram : unsigned(1 DOWNTO 0) := "00";
+    CONSTANT flag_to_ram : unsigned(1 DOWNTO 0) := "01";
+    CONSTANT flag_from_ram : unsigned(1 DOWNTO 0) := "10";
 
     SIGNAL is_zero_s : STD_LOGIC;
+    SIGNAL is_not_zero_s : STD_LOGIC;
     SIGNAL is_neg_s : STD_LOGIC;
+    SIGNAL is_not_neg_s : STD_LOGIC;
 
     CONSTANT R_mux_sel : STD_LOGIC := '1';
     CONSTANT I_mux_sel : STD_LOGIC := '0';
@@ -100,13 +102,18 @@ BEGIN
         '0';
 
     --setting condition flags for relative jump:  
-    is_zero <= '1' WHEN ula_out = "0000000000000000" ELSE
+    is_neg <= is_neg_s;
+    is_not_neg <= is_not_neg_s;
+    is_zero <= is_zero_s;
+    is_not_zero <= is_not_zero_s;
+    
+    is_zero_s <= '1' WHEN ula_out = "0000000000000000" ELSE
         '0';
-    is_not_zero <= NOT is_zero_s;
+    is_not_zero_s <= NOT is_zero_s;
 
-    is_neg <= '1' WHEN ula_out(15) = '1' ELSE
+    is_neg_s <= '1' WHEN ula_out(15) = '1' ELSE
         '0';
-    is_not_neg <= NOT is_neg_s;
+    is_not_neg_s <= NOT is_neg_s;
 
     --flag that verifies if it's ula instruction for update the conditional flags used in jumpr instr.
     wr_en_update_jumpr_flag <= '1' WHEN estado(1) = '1' AND (instr(13 DOWNTO 12) = "00" OR instr(13 DOWNTO 12) = "01")
