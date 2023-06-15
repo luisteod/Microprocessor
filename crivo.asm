@@ -15,5 +15,5 @@
     CMP R2, #33
     JUMPR N, #-3
     ADD R1, #1    
-    CMP R0, [R1]
+    CMP [R1] , R0 
     JUMPR NZ, #-8
